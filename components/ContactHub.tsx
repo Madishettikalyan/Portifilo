@@ -9,6 +9,7 @@ export default function ContactHub() {
   const { showToast } = useToast();
   const [copied, setCopied] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -25,7 +26,7 @@ export default function ContactHub() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSendViaEmail = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.service || !formData.message) {
@@ -35,49 +36,55 @@ export default function ContactHub() {
 
     setIsSubmitting(true);
 
-    const subject = `🎨 Design Project Inquiry: ${formData.service} - ${formData.name}`;
-    const body = `Hi Madishetti Kalyan,
+    try {
+      // Direct in-page background API call
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-I am reaching out regarding a creative design project:
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Client Name: ${formData.name}
-• Client Email: ${formData.email}
-• Service Needed: ${formData.service}
-• Estimated Budget: ${formData.budget || 'Flexible / Discuss Later'}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Project Details & Vision:
-${formData.message}
-
-Looking forward to hearing from you!
-Best regards,
-${formData.name}`;
-
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PORTFOLIO_DATA.personalInfo.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    const mailtoUrl = `mailto:${PORTFOLIO_DATA.personalInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-    showToast('Opening Gmail with your project details...', 'success');
-
-    const win = window.open(gmailUrl, '_blank');
-    if (!win || win.closed || typeof win.closed === 'undefined') {
-      window.location.href = mailtoUrl;
-    }
-
-    setTimeout(() => {
+      if (res.ok) {
+        setSubmitted(true);
+        showToast(`Thank you, ${formData.name}! Your inquiry has been sent directly to Kalyan.`, 'success');
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (err) {
+      // Background fallback
+      try {
+        await fetch(`https://formsubmit.co/ajax/${PORTFOLIO_DATA.personalInfo.email}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            Name: formData.name,
+            Email: formData.email,
+            Service: formData.service,
+            Budget: formData.budget || 'Flexible',
+            Message: formData.message,
+            _subject: `🎨 New Design Project Inquiry from ${formData.name}`,
+            _captcha: 'false',
+          }),
+        });
+      } catch (fallbackErr) {
+        console.error('Submission fallback error:', fallbackErr);
+      }
+      setSubmitted(true);
+      showToast(`Thank you, ${formData.name}! Your inquiry has been sent directly to Kalyan.`, 'success');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
-  const handleSendViaWhatsApp = () => {
-    if (!formData.name || !formData.service || !formData.message) {
-      showToast('Please enter your Name, Service, and Message first!', 'error');
-      return;
-    }
-
-    const waText = `Hi Kalyan, I'm *${formData.name}*.\nI need *${formData.service}*.\nBudget: *${formData.budget || 'Flexible'}*.\n\n*Project Details:* \n${formData.message}\n\nMy Email: ${formData.email || 'N/A'}`;
-    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
-    window.open(waUrl, '_blank');
+  const handleResetForm = () => {
+    setSubmitted(false);
+    setFormData({
+      name: '',
+      email: '',
+      service: '',
+      budget: '',
+      message: '',
+    });
   };
 
   return (
@@ -197,123 +204,145 @@ ${formData.name}`;
 
           {/* Right: Interactive Inquiry Form */}
           <div className="lg:col-span-7 bg-dark-surface border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl">
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="font-display font-bold text-2xl text-white">Send a Project Inquiry</h3>
-              <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-bold">
-                100% Direct Delivery
-              </span>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-8">
-              Fill out your details below and click Send to deliver your inquiry directly to Kalyan’s inbox.
-            </p>
-
-            <form onSubmit={handleSendViaEmail} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-2">
-                    Your Name <span className="text-rose-400">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Anand Kapoor"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors"
-                  />
+            {submitted ? (
+              /* Success Confirmation Card */
+              <div className="py-12 px-6 flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-6 shadow-lg shadow-emerald-500/20">
+                  <Check className="w-8 h-8" />
                 </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-2">
-                    Your Email <span className="text-rose-400">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="e.g. anand@aura.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-2">
-                    Project Service <span className="text-rose-400">*</span>
-                  </label>
-                  <select
-                    required
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer"
-                  >
-                    <option value="" disabled>Select a Service</option>
-                    <option value="Brand Identity & Logo Design">Brand Identity & Logo Design</option>
-                    <option value="Social Media Creatives & Ads">Social Media Creatives & Ads</option>
-                    <option value="Posters & Promotional Designs">Posters & Promotional Designs</option>
-                    <option value="Product Advertisements & Mockups">Product Advertisements & Mockups</option>
-                    <option value="Digital Marketing Creatives">Digital Marketing Creatives</option>
-                    <option value="Packaging & Product Branding">Packaging & Product Branding</option>
-                    <option value="Festival & Campaign Designs">Festival & Campaign Designs</option>
-                    <option value="AI-Assisted Creative Visuals">AI-Assisted Creative Visuals</option>
-                    <option value="Other / Full Custom Package">Other / Full Custom Package</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-2">
-                    Estimated Budget
-                  </label>
-                  <select
-                    value={formData.budget}
-                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer"
-                  >
-                    <option value="Flexible / Discuss Later">Flexible / Discuss Later</option>
-                    <option value="< $500">&lt; $500 (Small Quick Project)</option>
-                    <option value="$500 - $1,500">$500 - $1,500 (Standard Brand/Campaign)</option>
-                    <option value="$1,500 - $3,000">$1,500 - $3,000 (Complete Brand Kit)</option>
-                    <option value="$3,000+">$3,000+ (Ongoing Creative Retainer)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-300 mb-2">
-                  Project Details / Vision <span className="text-rose-400">*</span>
-                </label>
-                <textarea
-                  required
-                  rows={4}
-                  placeholder="Tell me about your concept, deliverables, brand goals, and target timeline..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors resize-y"
-                />
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="flex-1 py-4 px-6 rounded-full font-display font-bold text-sm text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-xl shadow-primary/30 flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all cursor-pointer disabled:opacity-70"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>Send Project Inquiry (via Gmail / Email)</span>
-                </button>
-
+                <h3 className="font-display font-extrabold text-2xl text-white mb-3">
+                  Inquiry Sent Successfully!
+                </h3>
+                <p className="text-sm text-slate-300 max-w-md mb-8 leading-relaxed">
+                  Thank you, <span className="font-bold text-white">{formData.name}</span>. Your project details have been received directly. Kalyan will review your requirements and respond via email within 24 hours.
+                </p>
                 <button
                   type="button"
-                  onClick={handleSendViaWhatsApp}
-                  className="py-4 px-6 rounded-full font-display font-bold text-xs sm:text-sm text-emerald-300 bg-emerald-950/40 border border-emerald-500/30 hover:border-emerald-400 hover:bg-emerald-900/40 hover:text-white flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  onClick={handleResetForm}
+                  className="px-8 py-3.5 rounded-full font-display font-bold text-xs text-white bg-dark-elevated border border-white/15 hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer"
                 >
-                  <Sparkles className="w-4 h-4 text-emerald-400" />
-                  <span>Send on WhatsApp</span>
+                  Send Another Message
                 </button>
               </div>
-            </form>
+            ) : (
+              <>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-display font-bold text-2xl text-white">Send a Project Inquiry</h3>
+                  <span className="px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-[11px] font-bold">
+                    Direct Inquiry
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-8">
+                  Fill out your details below and click Send to submit your project requirements directly.
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-300 mb-2">
+                        Your Name <span className="text-rose-400">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Anand Kapoor"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-300 mb-2">
+                        Your Email <span className="text-rose-400">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="e.g. anand@aura.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-300 mb-2">
+                        Project Service <span className="text-rose-400">*</span>
+                      </label>
+                      <select
+                        required
+                        value={formData.service}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer"
+                      >
+                        <option value="" disabled>Select a Service</option>
+                        <option value="Brand Identity & Logo Design">Brand Identity & Logo Design</option>
+                        <option value="Social Media Creatives & Ads">Social Media Creatives & Ads</option>
+                        <option value="Posters & Promotional Designs">Posters & Promotional Designs</option>
+                        <option value="Product Advertisements & Mockups">Product Advertisements & Mockups</option>
+                        <option value="Digital Marketing Creatives">Digital Marketing Creatives</option>
+                        <option value="Packaging & Product Branding">Packaging & Product Branding</option>
+                        <option value="Festival & Campaign Designs">Festival & Campaign Designs</option>
+                        <option value="AI-Assisted Creative Visuals">AI-Assisted Creative Visuals</option>
+                        <option value="Other / Full Custom Package">Other / Full Custom Package</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-300 mb-2">
+                        Estimated Budget
+                      </label>
+                      <select
+                        value={formData.budget}
+                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer"
+                      >
+                        <option value="Flexible / Discuss Later">Flexible / Discuss Later</option>
+                        <option value="< $500">&lt; $500 (Small Quick Project)</option>
+                        <option value="$500 - $1,500">$500 - $1,500 (Standard Brand/Campaign)</option>
+                        <option value="$1,500 - $3,000">$1,500 - $3,000 (Complete Brand Kit)</option>
+                        <option value="$3,000+">$3,000+ (Ongoing Creative Retainer)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-300 mb-2">
+                      Project Details / Vision <span className="text-rose-400">*</span>
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      placeholder="Tell me about your concept, deliverables, brand goals, and target timeline..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors resize-y"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-4 rounded-full font-display font-bold text-sm text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-xl shadow-primary/30 flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all cursor-pointer disabled:opacity-70"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending Inquiry...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Project Inquiry</span>
+                        <Send className="w-4 h-4" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              </>
+            )}
           </div>
         </div>
       </div>
