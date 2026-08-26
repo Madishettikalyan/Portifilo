@@ -17,7 +17,7 @@ export default function Navbar() {
         setIsScrolled(false);
       }
 
-      const sections = ['about', 'services', 'strengths', 'portfolio', 'experience', 'contact'];
+      const sections = ['about', 'services', 'strengths', 'portfolio', 'motion', 'experience', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -62,12 +62,13 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {[
-            { label: 'About & Philosophy', href: '#about', id: 'about' },
+            { label: 'About', href: '#about', id: 'about' },
             { label: 'Services', href: '#services', id: 'services' },
             { label: 'Strengths', href: '#strengths', id: 'strengths' },
             { label: 'Portfolio', href: '#portfolio', id: 'portfolio' },
+            { label: 'Motion Lab', href: '#motion', id: 'motion' },
             { label: 'Experience', href: '#experience', id: 'experience' },
           ].map((link) => (
             <a
@@ -89,47 +90,44 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <a
             href="#contact"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all"
+            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover text-white text-xs font-bold font-display shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all"
           >
-            <span>Let&apos;s Talk</span>
+            <span>Hire Kalyan</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
 
-          {/* Mobile Menu Hamburger */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2.5 rounded-xl bg-dark-elevated border border-white/10 text-slate-300 hover:text-white"
+            className="p-2 rounded-xl bg-dark-surface border border-white/10 text-slate-300 hover:text-white md:hidden"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[65px] bottom-0 bg-dark-bg/95 backdrop-blur-2xl border-b border-white/10 p-6 flex flex-col justify-between animate-fadeIn z-50">
-          <div className="flex flex-col gap-5 pt-4">
-            {[
-              { label: 'About & Philosophy', href: '#about' },
-              { label: 'What I Do (Services)', href: '#services' },
-              { label: 'Core Strengths', href: '#strengths' },
-              { label: 'Featured Projects', href: '#portfolio' },
-              { label: 'Experience & Arsenal', href: '#experience' },
-              { label: 'Let’s Create Together', href: '#contact', highlight: true },
-            ].map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`text-xl font-display font-bold py-2 ${
-                  item.highlight ? 'text-primary' : 'text-slate-300 hover:text-white'
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
+        <div className="md:hidden bg-dark-surface/95 backdrop-blur-2xl border-b border-white/10 px-6 py-6 space-y-4 animate-in slide-in-from-top-4 duration-200 shadow-2xl">
+          {[
+            { label: 'About & Philosophy', href: '#about', id: 'about' },
+            { label: 'Services (10 Disciplines)', href: '#services', id: 'services' },
+            { label: 'Core Strengths', href: '#strengths', id: 'strengths' },
+            { label: 'Design Portfolio (9 Case Studies)', href: '#portfolio', id: 'portfolio' },
+            { label: 'Motion Lab (Shorts & Long Films)', href: '#motion', id: 'motion' },
+            { label: 'Experience & Milestones', href: '#experience', id: 'experience' },
+            { label: 'Contact & Project Inquiry', href: '#contact', id: 'contact' },
+          ].map((link) => (
+            <a
+              key={link.id}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-base font-semibold text-slate-200 hover:text-primary py-2 border-b border-white/5"
+            >
+              {link.label}
+            </a>
+          ))}
 
           <div className="border-t border-white/10 pt-6 flex flex-col gap-4">
             <div className="flex items-center gap-2 text-xs text-emerald-400 font-semibold">

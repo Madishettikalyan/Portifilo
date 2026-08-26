@@ -54,6 +54,24 @@ export interface Testimonial {
   quote: string;
 }
 
+export interface VideoItem {
+  id: string;
+  title: string;
+  type: 'short' | 'long';
+  aspectRatio: '9:16' | '16:9';
+  duration: string;
+  category: string;
+  client: string;
+  year: string;
+  thumbnail: string;
+  videoUrl: string;
+  viewsCount?: string;
+  description: string;
+  tags: string[];
+  tools: string[];
+  gradient: string;
+}
+
 export const PORTFOLIO_DATA = {
   personalInfo: {
     name: 'Madishetti Kalyan',
@@ -415,5 +433,130 @@ export const PORTFOLIO_DATA = {
       avatar: 'RV',
       quote: '“From logo guidelines to retail packaging and AI-assisted key visuals, Kalyan delivered beyond our highest expectations. He’s our go-to creative thinker for every big project.”'
     }
-  ] as Testimonial[]
+  ] as Testimonial[],
+
+  videos: [
+    // 📱 Short Videos / Reels (9:16 Vertical)
+    {
+      id: 'kinetic-type-reel',
+      title: 'Kinetic Typography & Glitch Motion',
+      type: 'short',
+      aspectRatio: '9:16',
+      duration: '0:15',
+      category: 'Typography & Motion Reel',
+      client: 'Creative Lab Showcase',
+      year: '2024',
+      thumbnail: '/images/kinetic.jpg',
+      videoUrl: '/videos/sample-reel.mp4',
+      viewsCount: '124K Views',
+      description: 'An electrifying vertical reel showcasing high-speed kinetic typography, distorted Swiss grid transitions, dynamic sound design, and experimental motion graphics.',
+      tags: ['Kinetic Type', 'After Effects', 'Sound Sync', '9:16 Reel'],
+      tools: ['Adobe After Effects', 'Adobe Illustrator', 'Custom SFX'],
+      gradient: 'from-slate-900 via-indigo-950 to-black',
+    },
+    {
+      id: 'aura-cosmetic-reel',
+      title: 'AURA 3D Skincare Bottle Rotation & Liquid Sim',
+      type: 'short',
+      aspectRatio: '9:16',
+      duration: '0:20',
+      category: '3D Product Motion Reel',
+      client: 'Aura Organics Laboratories',
+      year: '2024',
+      thumbnail: '/images/aura.jpg',
+      videoUrl: '/videos/sample-reel.mp4',
+      viewsCount: '89K Views',
+      description: 'Velvet soft studio lighting simulation with tactile cosmetic bottle rotation, gold-foil monogram glint, and macro botanical liquid droplet interactions.',
+      tags: ['3D Product Reel', 'Liquid Simulation', 'Lighting & Textures'],
+      tools: ['Blender 3D', 'After Effects', 'Premiere Pro'],
+      gradient: 'from-indigo-950 via-slate-900 to-black',
+    },
+    {
+      id: 'velocity-fitness-reel',
+      title: 'Velocity 30-Day Fitness Blitz Dynamic Ad Reel',
+      type: 'short',
+      aspectRatio: '9:16',
+      duration: '0:25',
+      category: 'Social Ad Reel',
+      client: 'Velocity Fitness Global',
+      year: '2024',
+      thumbnail: '/images/velocity.jpg',
+      videoUrl: '/videos/sample-reel.mp4',
+      viewsCount: '210K Views',
+      description: 'High-octane mobile ad reel built with dynamic typography, neon athlete framing, speed ramping, and high-CTR call-to-action badges for Instagram Reels.',
+      tags: ['Speed Ramping', 'Social Ads', 'Dynamic Zoom', 'Instagram Reels'],
+      tools: ['Adobe Premiere Pro', 'After Effects', 'Photoshop'],
+      gradient: 'from-red-950 via-zinc-900 to-black',
+    },
+    {
+      id: 'cyberdusk-ai-reel',
+      title: 'Cyber Dusk AI Metacity Animated Concept Art',
+      type: 'short',
+      aspectRatio: '9:16',
+      duration: '0:18',
+      category: 'AI Motion Art Reel',
+      client: 'Dusk Entertainment',
+      year: '2024',
+      thumbnail: '/images/cyberdusk.jpg',
+      videoUrl: '/videos/sample-reel.mp4',
+      viewsCount: '165K Views',
+      description: '2.5D parallax depth-mapped anime metacity with moving neon rain volumetric lighting, floating holographic billboards, and synthwave atmosphere.',
+      tags: ['Parallax Motion', 'AI Matte Painting', 'Neon Rain', 'Looping Art'],
+      tools: ['Midjourney AI', 'Photoshop 2.5D', 'After Effects'],
+      gradient: 'from-fuchsia-950 via-indigo-950 to-black',
+    },
+
+    // 🎬 Long Videos & Commercials (16:9 Widescreen)
+    {
+      id: 'neopulse-brand-film',
+      title: 'NEO PULSE 2024 Global Tech Summit Official Brand Film',
+      type: 'long',
+      aspectRatio: '16:9',
+      duration: '1:45',
+      category: 'Brand Film & Keynote Visuals',
+      client: 'NeoPulse Technology Forum',
+      year: '2024',
+      thumbnail: '/images/neopulse.jpg',
+      videoUrl: '/videos/sample-film.mp4',
+      viewsCount: '45K Views',
+      description: 'The flagship keynote opener and brand motion film for an international 3,500-attendee tech conference. Features holographic 3D typography, cybernetic grid visuals, and thunderous audio sync.',
+      tags: ['4K Keynote Film', 'Stage Visuals', '3D Motion Graphics', 'Event Opener'],
+      tools: ['After Effects', 'Cinema 4D', 'Premiere Pro', 'Audio Mastering'],
+      gradient: 'from-purple-950 via-gray-900 to-black',
+    },
+    {
+      id: 'lumen-commercial',
+      title: 'LÚMEN Organic Sparkling Elixir Cinematic Commercial',
+      type: 'long',
+      aspectRatio: '16:9',
+      duration: '1:15',
+      category: 'TV Commercial & Product CGI',
+      client: 'Lúmen Botanicals Inc.',
+      year: '2023',
+      thumbnail: '/images/lumen.jpg',
+      videoUrl: '/videos/sample-film.mp4',
+      viewsCount: '62K Views',
+      description: 'A broadcast-ready commercial highlighting organic sparkling botanicals, macro aluminum can condensation, golden hour sun flares, and crisp nature cinematography.',
+      tags: ['TV Commercial', 'Product CGI', 'Color Grading', 'Macro Fluid'],
+      tools: ['DaVinci Resolve', 'Blender', 'After Effects'],
+      gradient: 'from-emerald-950 via-teal-950 to-black',
+    },
+    {
+      id: 'zenith-roasters-film',
+      title: 'Zenith Specialty Coffee: The Art of Artisanal Roasting',
+      type: 'long',
+      aspectRatio: '16:9',
+      duration: '2:10',
+      category: 'Brand Documentary & Story Film',
+      client: 'Zenith Specialty Coffee',
+      year: '2023',
+      thumbnail: '/images/zenith.jpg',
+      videoUrl: '/videos/sample-film.mp4',
+      viewsCount: '38K Views',
+      description: 'A warm, sensorial brand documentary capturing the craftsmanship of single-origin coffee roasting, packaging label topography, and cafe atmosphere.',
+      tags: ['Brand Storytelling', 'Cinematic Grain', 'Visual Identity in Motion'],
+      tools: ['Premiere Pro', 'DaVinci Resolve', 'Custom Typography'],
+      gradient: 'from-amber-950 via-stone-900 to-black',
+    },
+  ] as VideoItem[],
 };

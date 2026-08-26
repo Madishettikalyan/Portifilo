@@ -5,6 +5,7 @@ import AboutPhilosophy from '@/components/AboutPhilosophy';
 import Services from '@/components/Services';
 import Strengths from '@/components/Strengths';
 import PortfolioGallery from '@/components/PortfolioGallery';
+import VideoShowcase from '@/components/VideoShowcase';
 import ExperienceTimeline from '@/components/ExperienceTimeline';
 import Testimonials from '@/components/Testimonials';
 import ContactHub from '@/components/ContactHub';
@@ -20,6 +21,7 @@ export default function HomePage() {
       <Services />
       <Strengths />
       <PortfolioGallery />
+      <VideoShowcase />
       <ExperienceTimeline />
       <Testimonials />
       <ContactHub />
