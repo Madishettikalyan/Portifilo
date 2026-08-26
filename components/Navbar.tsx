@@ -88,7 +88,7 @@ export default function Navbar() {
               { label: 'Strengths', sub: 'Core Impact', num: '03', href: '#strengths', id: 'strengths' },
               { label: 'Portfolio', sub: '9 Projects', num: '04', href: '#portfolio', id: 'portfolio' },
               { label: 'Motion Lab', sub: 'Reels & 4K', num: '05', href: '#motion', id: 'motion' },
-              { label: 'Experience', sub: '5+ Yrs Career', num: '06', href: '#experience', id: 'experience' },
+              { label: 'Experience', sub: '2+ Yrs Career', num: '06', href: '#experience', id: 'experience' },
               { label: 'Contact', sub: 'Start Project', num: '07', href: '#contact', id: 'contact' },
             ].map((link) => (
               <a
@@ -178,7 +178,7 @@ export default function Navbar() {
               { label: 'Strengths', sub: 'Core Impact', num: '03', href: '#strengths', id: 'strengths' },
               { label: 'Portfolio', sub: '9 Selected Works', num: '04', href: '#portfolio', id: 'portfolio' },
               { label: 'Motion Lab', sub: 'Shorts & 4K Films', num: '05', href: '#motion', id: 'motion' },
-              { label: 'Experience', sub: '5+ Yrs Journey', num: '06', href: '#experience', id: 'experience' },
+              { label: 'Experience', sub: '2+ Yrs Journey', num: '06', href: '#experience', id: 'experience' },
               { label: 'Contact', sub: 'Get In Touch', num: '07', href: '#contact', id: 'contact' },
             ].map((link) => (
               <a
