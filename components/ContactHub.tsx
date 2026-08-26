@@ -127,23 +127,24 @@ export default function ContactHub() {
               </p>
 
               {/* Direct WhatsApp & Phone Card */}
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-dark-elevated to-dark-surface border border-emerald-500/30 flex items-center justify-between gap-3 mb-4">
-                <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="w-10 h-10 rounded-xl bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366] flex-shrink-0 shadow-lg shadow-emerald-500/10">
-                    <WhatsAppLogo className="w-5 h-5 fill-[#25D366]" />
+              <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-dark-elevated to-dark-surface border border-emerald-500/30 flex items-center justify-between gap-2 sm:gap-3 mb-4">
+                <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366] flex-shrink-0 shadow-lg shadow-emerald-500/10">
+                    <WhatsAppLogo className="w-4 h-4 sm:w-5 sm:h-5 fill-[#25D366]" />
                   </div>
-                  <div className="overflow-hidden flex-1 min-w-0">
+                  <div className="flex-1 min-w-0 flex flex-col justify-center">
                     <div className="flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0" />
-                      <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-emerald-400 whitespace-nowrap truncate block">
-                        WhatsApp & Phone
+                      <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-emerald-400 whitespace-nowrap block">
+                        <span className="sm:hidden">WhatsApp</span>
+                        <span className="hidden sm:inline">WhatsApp & Phone</span>
                       </span>
                     </div>
                     <a
                       href="https://wa.me/918179157002"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-display font-bold text-sm sm:text-base text-white hover:text-[#25D366] transition-colors whitespace-nowrap truncate block"
+                      className="font-display font-bold text-[13px] sm:text-base text-white hover:text-[#25D366] transition-colors whitespace-nowrap block"
                     >
                       +91 8179157002
                     </a>
@@ -155,7 +156,7 @@ export default function ContactHub() {
                     href="https://wa.me/918179157002"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3.5 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-xs font-bold text-black flex items-center gap-1.5 shadow-md shadow-emerald-500/30 transition-all cursor-pointer"
+                    className="px-2.5 py-1.5 sm:px-3.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-[11px] sm:text-xs font-bold text-black flex items-center gap-1.5 shadow-md shadow-emerald-500/30 transition-all cursor-pointer"
                   >
                     <WhatsAppLogo className="w-3.5 h-3.5 fill-black" />
                     <span>WhatsApp</span>
