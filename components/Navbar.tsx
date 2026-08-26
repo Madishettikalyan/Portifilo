@@ -70,6 +70,7 @@ export default function Navbar() {
             { label: 'Portfolio', href: '#portfolio', id: 'portfolio' },
             { label: 'Motion Lab', href: '#motion', id: 'motion' },
             { label: 'Experience', href: '#experience', id: 'experience' },
+            { label: 'Contact', href: '#contact', id: 'contact' },
           ].map((link) => (
             <a
               key={link.id}
@@ -86,20 +87,11 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Right Action Button */}
-        <div className="flex items-center gap-4">
-          <a
-            href="#contact"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover text-white text-xs font-bold font-display shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all"
-          >
-            <span>Hire Kalyan</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-
-          {/* Mobile Menu Button */}
+        {/* Right Mobile Menu Trigger */}
+        <div className="flex items-center md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl bg-dark-surface border border-white/10 text-slate-300 hover:text-white md:hidden"
+            className="p-2 rounded-xl bg-dark-surface border border-white/10 text-slate-300 hover:text-white"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

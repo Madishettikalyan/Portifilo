@@ -181,10 +181,12 @@ export default function VideoShowcase() {
       </div>
 
       {/* Interactive Video Modal Lightbox */}
-      <VideoModal
-        video={selectedVideo}
-        onClose={() => setSelectedVideo(null)}
-      />
+      {selectedVideo && (
+        <VideoModal
+          video={selectedVideo}
+          onClose={() => setSelectedVideo(null)}
+        />
+      )}
     </section>
   );
 }

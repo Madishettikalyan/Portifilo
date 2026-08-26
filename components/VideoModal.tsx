@@ -16,6 +16,8 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    if (!video) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
       if (e.key === ' ' && videoRef.current) {
@@ -29,9 +31,9 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
-  }, [onClose]);
+  }, [video, onClose]);
 
   if (!video) return null;
 
