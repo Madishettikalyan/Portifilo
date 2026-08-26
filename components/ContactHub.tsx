@@ -8,12 +8,76 @@ import { useToast } from './Toast';
 export default function ContactHub() {
   const { showToast } = useToast();
   const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    service: '',
+    budget: '',
+    message: '',
+  });
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PORTFOLIO_DATA.personalInfo.email);
     setCopied(true);
     showToast(`Copied email to clipboard: ${PORTFOLIO_DATA.personalInfo.email}`, 'success');
     setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleSendViaEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.service || !formData.message) {
+      showToast('Please fill in all required fields (*)', 'error');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const subject = `🎨 Design Project Inquiry: ${formData.service} - ${formData.name}`;
+    const body = `Hi Madishetti Kalyan,
+
+I am reaching out regarding a creative design project:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Client Name: ${formData.name}
+• Client Email: ${formData.email}
+• Service Needed: ${formData.service}
+• Estimated Budget: ${formData.budget || 'Flexible / Discuss Later'}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Project Details & Vision:
+${formData.message}
+
+Looking forward to hearing from you!
+Best regards,
+${formData.name}`;
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(PORTFOLIO_DATA.personalInfo.email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoUrl = `mailto:${PORTFOLIO_DATA.personalInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    showToast('Opening Gmail with your project details...', 'success');
+
+    const win = window.open(gmailUrl, '_blank');
+    if (!win || win.closed || typeof win.closed === 'undefined') {
+      window.location.href = mailtoUrl;
+    }
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+    }, 1000);
+  };
+
+  const handleSendViaWhatsApp = () => {
+    if (!formData.name || !formData.service || !formData.message) {
+      showToast('Please enter your Name, Service, and Message first!', 'error');
+      return;
+    }
+
+    const waText = `Hi Kalyan, I'm *${formData.name}*.\nI need *${formData.service}*.\nBudget: *${formData.budget || 'Flexible'}*.\n\n*Project Details:* \n${formData.message}\n\nMy Email: ${formData.email || 'N/A'}`;
+    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(waText)}`;
+    window.open(waUrl, '_blank');
   };
 
   return (
@@ -26,64 +90,80 @@ export default function ContactHub() {
             <span>LET’S CREATE SOMETHING EXTRAORDINARY</span>
           </div>
           <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight mb-4 leading-tight">
-            Have an exciting project or brand in mind? <br />
-            <span className="text-gradient">Let’s bring your vision to life.</span>
+            Have a Project in Mind? <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-coral">
+              Let’s Make It Happen.
+            </span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Whether you need a full brand identity, viral social creatives, packaging design, or high-impact advertising visuals — I&apos;m ready to craft something unforgettable.
+          <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
+            Whether you need a complete brand identity, high-converting social campaigns, or bold packaging visuals, I’m ready to collaborate.
           </p>
         </div>
 
-        {/* 2-Card Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Left: Direct Contact Information */}
-          <div className="lg:col-span-5 bg-dark-surface border border-white/10 rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-2xl">
-            <div>
-              <h3 className="font-display font-bold text-2xl text-white mb-2">Get In Touch Directly</h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-8">
-                Feel free to reach out via email, WhatsApp, or connect on design networks. I typically respond within 24 hours.
+        {/* 2-Column Contact Showcase */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left: Contact Info & Value Prop */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-dark-surface border border-white/10 rounded-3xl p-8 shadow-xl">
+              <h3 className="font-display font-bold text-xl text-white mb-2">Direct Contact</h3>
+              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
+                Feel free to email me directly or send a message below with your project goals, deliverables, and timeline.
               </p>
 
-              {/* Channels List */}
-              <div className="space-y-4 mb-8">
-                {/* Email */}
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-dark-elevated border border-white/10">
-                  <div className="flex items-center gap-3.5 overflow-hidden">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shrink-0">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div className="flex flex-col overflow-hidden">
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email Address</span>
-                      <span className="text-xs sm:text-sm font-semibold text-white truncate">{PORTFOLIO_DATA.personalInfo.email}</span>
-                    </div>
+              {/* Email Card with Copy Button */}
+              <div className="p-4 rounded-2xl bg-dark-elevated border border-white/10 flex items-center justify-between gap-3 mb-6">
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+                    <Mail className="w-5 h-5" />
                   </div>
-                  <button
-                    onClick={handleCopyEmail}
-                    className="p-2.5 rounded-xl bg-dark-surface border border-white/10 text-slate-300 hover:text-white hover:border-primary/50 transition-colors shrink-0 ml-2"
-                    aria-label="Copy Email Address"
-                  >
-                    {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                  </button>
+                  <div className="overflow-hidden">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block">Direct Email</span>
+                    <a
+                      href={`mailto:${PORTFOLIO_DATA.personalInfo.email}`}
+                      className="font-display font-semibold text-xs sm:text-sm text-white hover:text-primary transition-colors truncate block"
+                    >
+                      {PORTFOLIO_DATA.personalInfo.email}
+                    </a>
+                  </div>
                 </div>
 
-                {/* Location */}
-                <div className="flex items-center gap-3.5 p-4 rounded-2xl bg-dark-elevated border border-white/10">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-                    <MapPin className="w-5 h-5" />
+                <button
+                  onClick={handleCopyEmail}
+                  className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-primary/20 hover:border-primary/40 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition-all flex-shrink-0"
+                  title="Copy email to clipboard"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="text-emerald-400">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Quick Highlights */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center gap-3 text-slate-300">
+                  <div className="w-8 h-8 rounded-lg bg-dark-bg border border-white/10 flex items-center justify-center text-primary flex-shrink-0">
+                    <MapPin className="w-4 h-4" />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Location & Availability</span>
+                  <div>
+                    <span className="text-[10px] text-slate-400 block">Location</span>
                     <span className="text-xs sm:text-sm font-semibold text-white">{PORTFOLIO_DATA.personalInfo.location}</span>
                   </div>
                 </div>
 
-                {/* Experience */}
-                <div className="flex items-center gap-3.5 p-4 rounded-2xl bg-dark-elevated border border-white/10">
-                  <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
-                    <Award className="w-5 h-5" />
+                <div className="flex items-center gap-3 text-slate-300">
+                  <div className="w-8 h-8 rounded-lg bg-dark-bg border border-white/10 flex items-center justify-center text-secondary flex-shrink-0">
+                    <Award className="w-4 h-4" />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Experience Level</span>
+                  <div>
+                    <span className="text-[10px] text-slate-400 block">Experience</span>
                     <span className="text-xs sm:text-sm font-semibold text-white">{PORTFOLIO_DATA.personalInfo.experienceYears} Years Graphic Design</span>
                   </div>
                 </div>
@@ -91,7 +171,7 @@ export default function ContactHub() {
             </div>
 
             {/* Social Links Block */}
-            <div className="border-t border-white/10 pt-6">
+            <div className="bg-dark-surface border border-white/10 rounded-3xl p-8 shadow-xl">
               <span className="text-xs font-bold text-slate-400 block mb-3 uppercase tracking-wider">Design Networks & Socials</span>
               <div className="flex flex-wrap gap-2">
                 {[
@@ -117,22 +197,17 @@ export default function ContactHub() {
 
           {/* Right: Interactive Inquiry Form */}
           <div className="lg:col-span-7 bg-dark-surface border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl">
-            <h3 className="font-display font-bold text-2xl text-white mb-2">Send a Project Inquiry</h3>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="font-display font-bold text-2xl text-white">Send a Project Inquiry</h3>
+              <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-bold">
+                100% Direct Delivery
+              </span>
+            </div>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-8">
-              Fill out the form below with your project goals, deliverables, and timeline.
+              Fill out your details below and click Send to deliver your inquiry directly to Kalyan’s inbox.
             </p>
 
-            <form
-              action={`https://formsubmit.co/${PORTFOLIO_DATA.personalInfo.email}`}
-              method="POST"
-              className="space-y-5"
-            >
-              {/* FormSubmit Configuration */}
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_subject" value="🎨 New Design Project Inquiry - Madishetti Kalyan Portfolio" />
-              <input type="hidden" name="_autoresponse" value="Thank you for reaching out to Madishetti Kalyan! I have received your project inquiry and will get back to you within 24 hours." />
-
+            <form onSubmit={handleSendViaEmail} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-xs font-bold text-slate-300 mb-2">
@@ -140,9 +215,10 @@ export default function ContactHub() {
                   </label>
                   <input
                     type="text"
-                    name="name"
                     required
                     placeholder="e.g. Anand Kapoor"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
@@ -153,9 +229,10 @@ export default function ContactHub() {
                   </label>
                   <input
                     type="email"
-                    name="email"
                     required
                     placeholder="e.g. anand@aura.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
@@ -167,9 +244,9 @@ export default function ContactHub() {
                     Project Service <span className="text-rose-400">*</span>
                   </label>
                   <select
-                    name="service"
                     required
-                    defaultValue=""
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer"
                   >
                     <option value="" disabled>Select a Service</option>
@@ -190,8 +267,8 @@ export default function ContactHub() {
                     Estimated Budget
                   </label>
                   <select
-                    name="budget"
-                    defaultValue="Flexible / Discuss Later"
+                    value={formData.budget}
+                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer"
                   >
                     <option value="Flexible / Discuss Later">Flexible / Discuss Later</option>
@@ -208,10 +285,11 @@ export default function ContactHub() {
                   Project Details / Vision <span className="text-rose-400">*</span>
                 </label>
                 <textarea
-                  name="message"
                   required
                   rows={4}
                   placeholder="Tell me about your concept, deliverables, brand goals, and target timeline..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors resize-y"
                 />
               </div>
@@ -219,21 +297,21 @@ export default function ContactHub() {
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
                   type="submit"
-                  className="flex-1 py-4 px-6 rounded-full font-display font-bold text-sm text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-xl shadow-primary/30 flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all cursor-pointer"
+                  disabled={isSubmitting}
+                  className="flex-1 py-4 px-6 rounded-full font-display font-bold text-sm text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-xl shadow-primary/30 flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all cursor-pointer disabled:opacity-70"
                 >
-                  <span>Send Project Inquiry</span>
                   <Send className="w-4 h-4" />
+                  <span>Send Project Inquiry (via Gmail / Email)</span>
                 </button>
 
-                <a
-                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${PORTFOLIO_DATA.personalInfo.email}&su=${encodeURIComponent('🎨 Design Project Inquiry - Madishetti Kalyan')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-4 px-6 rounded-full font-display font-bold text-xs sm:text-sm text-slate-200 bg-dark-elevated border border-white/10 hover:border-primary/50 hover:text-white flex items-center justify-center gap-2 transition-all hover:bg-white/5"
+                <button
+                  type="button"
+                  onClick={handleSendViaWhatsApp}
+                  className="py-4 px-6 rounded-full font-display font-bold text-xs sm:text-sm text-emerald-300 bg-emerald-950/40 border border-emerald-500/30 hover:border-emerald-400 hover:bg-emerald-900/40 hover:text-white flex items-center justify-center gap-2 transition-all cursor-pointer"
                 >
-                  <Mail className="w-4 h-4 text-primary" />
-                  <span>Open in Gmail</span>
-                </a>
+                  <Sparkles className="w-4 h-4 text-emerald-400" />
+                  <span>Send on WhatsApp</span>
+                </button>
               </div>
             </form>
           </div>
