@@ -216,13 +216,25 @@ export default function ContactHub() {
                 />
               </div>
 
-              <button
-                type="submit"
-                className="w-full py-4 rounded-full font-display font-bold text-sm text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-xl shadow-primary/30 flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all"
-              >
-                <span>Send Project Inquiry</span>
-                <Send className="w-4 h-4" />
-              </button>
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <button
+                  type="submit"
+                  className="flex-1 py-4 px-6 rounded-full font-display font-bold text-sm text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-xl shadow-primary/30 flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all cursor-pointer"
+                >
+                  <span>Send Project Inquiry</span>
+                  <Send className="w-4 h-4" />
+                </button>
+
+                <a
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${PORTFOLIO_DATA.personalInfo.email}&su=${encodeURIComponent('🎨 Design Project Inquiry - Madishetti Kalyan')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-4 px-6 rounded-full font-display font-bold text-xs sm:text-sm text-slate-200 bg-dark-elevated border border-white/10 hover:border-primary/50 hover:text-white flex items-center justify-center gap-2 transition-all hover:bg-white/5"
+                >
+                  <Mail className="w-4 h-4 text-primary" />
+                  <span>Open in Gmail</span>
+                </a>
+              </div>
             </form>
           </div>
         </div>
