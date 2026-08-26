@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Palette, ExternalLink } from 'lucide-react';
+import { Palette, ExternalLink, Search, X } from 'lucide-react';
 import { PORTFOLIO_DATA, Project } from '@/data/portfolioData';
 import CaseStudyModal from './CaseStudyModal';
 
@@ -16,17 +16,30 @@ const categories = [
 
 export default function PortfolioGallery() {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const filteredProjects = activeFilter === 'all'
-    ? PORTFOLIO_DATA.projects
-    : PORTFOLIO_DATA.projects.filter((p) => p.categorySlug === activeFilter);
+  const cleanQuery = searchQuery.toLowerCase().trim();
+
+  const filteredProjects = PORTFOLIO_DATA.projects.filter((p) => {
+    const matchesCategory = activeFilter === 'all' || p.categorySlug === activeFilter;
+    const matchesQuery =
+      !cleanQuery ||
+      p.title.toLowerCase().includes(cleanQuery) ||
+      p.category.toLowerCase().includes(cleanQuery) ||
+      p.client.toLowerCase().includes(cleanQuery) ||
+      p.tools.some((t) => t.toLowerCase().includes(cleanQuery)) ||
+      p.deliverables.toLowerCase().includes(cleanQuery) ||
+      p.overview.toLowerCase().includes(cleanQuery);
+
+    return matchesCategory && matchesQuery;
+  });
 
   return (
     <section className="py-24 relative" id="portfolio">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-primary uppercase mb-3">
             <Palette className="w-3.5 h-3.5" />
             <span>SELECTED WORKS</span>
@@ -39,13 +52,35 @@ export default function PortfolioGallery() {
           </p>
         </div>
 
+        {/* Live Search Bar in Gallery */}
+        <div className="max-w-md mx-auto mb-8">
+          <div className="relative flex items-center">
+            <Search className="w-4 h-4 text-primary absolute left-4 pointer-events-none" />
+            <input
+              type="text"
+              placeholder="Search designs by title, client, or tool (e.g. Photoshop)..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-11 pr-10 py-3 rounded-full bg-dark-surface border border-white/10 text-xs sm:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary/60 focus:bg-dark-elevated transition-all shadow-lg"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3.5 p-1 rounded-full text-slate-400 hover:text-white"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* Filter Navigation Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {categories.map((cat) => (
             <button
               key={cat.slug}
               onClick={() => setActiveFilter(cat.slug)}
-              className={`px-5 py-2.5 rounded-full text-xs font-bold font-display transition-all ${
+              className={`px-5 py-2.5 rounded-full text-xs font-bold font-display transition-all cursor-pointer ${
                 activeFilter === cat.slug
                   ? 'bg-primary text-white shadow-lg shadow-primary/30'
                   : 'bg-dark-surface border border-white/10 text-slate-400 hover:text-white hover:border-white/20'
