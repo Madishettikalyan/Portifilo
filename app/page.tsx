@@ -10,6 +10,7 @@ import ExperienceTimeline from '@/components/ExperienceTimeline';
 import Testimonials from '@/components/Testimonials';
 import ContactHub from '@/components/ContactHub';
 import Footer from '@/components/Footer';
+import WhatsAppWidget from '@/components/WhatsAppWidget';
 
 export default function HomePage() {
   return (
@@ -26,6 +27,7 @@ export default function HomePage() {
       <Testimonials />
       <ContactHub />
       <Footer />
+      <WhatsAppWidget />
     </main>
   );
 }

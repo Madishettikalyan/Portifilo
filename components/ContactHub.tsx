@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, MapPin, Award, Copy, Check, Send, Sparkles, Loader2 } from 'lucide-react';
+import { Mail, MapPin, Award, Copy, Check, Send, Sparkles, Loader2, Phone, MessageCircle } from 'lucide-react';
 import { PORTFOLIO_DATA } from '@/data/portfolioData';
 import { useToast } from './Toast';
 
 export default function ContactHub() {
   const { showToast } = useToast();
   const [copied, setCopied] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -24,6 +25,13 @@ export default function ContactHub() {
     setCopied(true);
     showToast(`Copied email to clipboard: ${PORTFOLIO_DATA.personalInfo.email}`, 'success');
     setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText(PORTFOLIO_DATA.personalInfo.phoneRaw || '8179157002');
+    setCopiedPhone(true);
+    showToast(`Copied phone to clipboard: +91 8179157002`, 'success');
+    setTimeout(() => setCopiedPhone(false), 2500);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -114,8 +122,52 @@ export default function ContactHub() {
             <div className="bg-dark-surface border border-white/10 rounded-3xl p-8 shadow-xl">
               <h3 className="font-display font-bold text-xl text-white mb-2">Direct Contact</h3>
               <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
-                Feel free to email me directly or send a message below with your project goals, deliverables, and timeline.
+                Feel free to message on WhatsApp, call directly, or send an inquiry below with your project goals.
               </p>
+
+              {/* Direct WhatsApp & Phone Card */}
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-dark-elevated to-dark-surface border border-emerald-500/30 flex items-center justify-between gap-3 mb-4">
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 flex-shrink-0 shadow-lg shadow-emerald-500/10">
+                    <MessageCircle className="w-5 h-5 fill-emerald-400/20" />
+                  </div>
+                  <div className="overflow-hidden">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-400 block">
+                        WhatsApp & Phone
+                      </span>
+                    </div>
+                    <a
+                      href="https://wa.me/918179157002"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-display font-bold text-sm sm:text-base text-white hover:text-emerald-400 transition-colors truncate block"
+                    >
+                      +91 8179157002
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <a
+                    href="https://wa.me/918179157002"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-xs font-bold text-black flex items-center gap-1 shadow-md shadow-emerald-500/30 transition-all cursor-pointer"
+                  >
+                    <span>Chat</span>
+                  </a>
+
+                  <button
+                    onClick={handleCopyPhone}
+                    className="p-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-slate-300 hover:text-white transition-all"
+                    title="Copy phone number"
+                  >
+                    {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
+              </div>
 
               {/* Email Card with Copy Button */}
               <div className="p-4 rounded-2xl bg-dark-elevated border border-white/10 flex items-center justify-between gap-3 mb-6">
@@ -136,7 +188,7 @@ export default function ContactHub() {
 
                 <button
                   onClick={handleCopyEmail}
-                  className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-primary/20 hover:border-primary/40 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition-all flex-shrink-0"
+                  className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-primary/20 hover:border-primary/40 text-xs font-semibold text-slate-300 hover:text-white flex items-center gap-1.5 transition-all flex-shrink-0 cursor-pointer"
                   title="Copy email to clipboard"
                 >
                   {copied ? (

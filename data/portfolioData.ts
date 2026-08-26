@@ -80,6 +80,8 @@ export const PORTFOLIO_DATA = {
     profileImage: '/images/profile.jpg',
     tagline: 'Transforming ideas into impossible-to-ignore visual experiences.',
     email: 'madishettikalyan55@gmail.com',
+    phone: '+91 8179157002',
+    phoneRaw: '8179157002',
     location: 'India (Available for Worldwide Remote)',
     philosophy: '“Design is not just about making things look good — it’s about making ideas impossible to ignore.”',
     bio: 'I’m Madishetti Kalyan, a passionate Graphic Designer with over 2 years of professional experience in creating impactful and visually engaging designs. I specialize in transforming ideas into creative visual experiences that communicate clearly, connect with audiences, and strengthen brand identity. My design approach combines creativity, visual storytelling, modern aesthetics, and attention to detail.',
@@ -88,7 +90,7 @@ export const PORTFOLIO_DATA = {
       dribbble: 'https://dribbble.com',
       linkedin: 'https://linkedin.com',
       instagram: 'https://instagram.com',
-      whatsapp: 'https://wa.me/',
+      whatsapp: 'https://wa.me/918179157002?text=Hi%20Kalyan,%20I%20saw%20your%20design%20portfolio%20and%20would%20like%20to%20discuss%20a%20project!',
     }
   },
 

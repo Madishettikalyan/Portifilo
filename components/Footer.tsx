@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ArrowUp, Mail } from 'lucide-react';
+import { ArrowUp, Mail, Phone, MessageCircle } from 'lucide-react';
 import { PORTFOLIO_DATA } from '@/data/portfolioData';
 
 export default function Footer() {
@@ -31,6 +31,7 @@ export default function Footer() {
               <li><a href="#services" className="hover:text-primary transition-colors">Core Specializations</a></li>
               <li><a href="#strengths" className="hover:text-primary transition-colors">My Strengths</a></li>
               <li><a href="#portfolio" className="hover:text-primary transition-colors">Featured Works</a></li>
+              <li><a href="#motion" className="hover:text-primary transition-colors">Motion Lab & Videos</a></li>
               <li><a href="#experience" className="hover:text-primary transition-colors">Experience & Tools</a></li>
             </ul>
           </div>
@@ -38,16 +39,29 @@ export default function Footer() {
           {/* Direct Connection */}
           <div className="md:col-span-4">
             <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider mb-4">Direct Connection</h4>
-            <a
-              href={`mailto:${PORTFOLIO_DATA.personalInfo.email}`}
-              className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-primary transition-colors mb-4"
-            >
-              <Mail className="w-4 h-4 text-primary" />
-              <span>{PORTFOLIO_DATA.personalInfo.email}</span>
-            </a>
+            <div className="flex flex-col gap-2.5 mb-4">
+              <a
+                href={`mailto:${PORTFOLIO_DATA.personalInfo.email}`}
+                className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-primary transition-colors"
+              >
+                <Mail className="w-4 h-4 text-primary" />
+                <span>{PORTFOLIO_DATA.personalInfo.email}</span>
+              </a>
+
+              <a
+                href="https://wa.me/918179157002"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-emerald-400 transition-colors"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <span>+91 8179157002 (WhatsApp & Call)</span>
+              </a>
+            </div>
 
             <div className="flex gap-2 pt-2">
               {[
+                { name: 'WhatsApp', url: 'https://wa.me/918179157002' },
                 { name: 'Behance', url: PORTFOLIO_DATA.personalInfo.socials.behance },
                 { name: 'Dribbble', url: PORTFOLIO_DATA.personalInfo.socials.dribbble },
                 { name: 'LinkedIn', url: PORTFOLIO_DATA.personalInfo.socials.linkedin },
