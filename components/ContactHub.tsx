@@ -25,7 +25,7 @@ export default function ContactHub() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.service || !formData.message) {
@@ -35,17 +35,48 @@ export default function ContactHub() {
 
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      showToast(`Thank you, ${formData.name}! Your inquiry has been received. Kalyan will reply within 24 hours.`, 'success');
-      setFormData({
-        name: '',
-        email: '',
-        service: '',
-        budget: '',
-        message: '',
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${PORTFOLIO_DATA.personalInfo.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: formData.name,
+          Email: formData.email,
+          'Service Needed': formData.service,
+          'Estimated Budget': formData.budget || 'Flexible / Discuss Later',
+          'Project Details': formData.message,
+          _subject: `🎨 New Design Project Inquiry from ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
       });
-    }, 1200);
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showToast(`Thank you, ${formData.name}! Your message has been sent directly to Kalyan's email. You will receive a reply within 24 hours.`, 'success');
+        setFormData({
+          name: '',
+          email: '',
+          service: '',
+          budget: '',
+          message: '',
+        });
+      } else {
+        throw new Error(data.message || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Contact Form Submission Error:', error);
+      // Fallback: Open user's mail client directly
+      showToast(`Opening your email client to send message to ${PORTFOLIO_DATA.personalInfo.email}...`, 'info');
+      const mailtoLink = `mailto:${PORTFOLIO_DATA.personalInfo.email}?subject=${encodeURIComponent(`Project Inquiry: ${formData.service}`)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nService: ${formData.service}\nBudget: ${formData.budget}\n\nMessage:\n${formData.message}`)}`;
+      window.open(mailtoLink, '_blank');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
