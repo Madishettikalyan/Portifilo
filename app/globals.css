@@ -31,17 +31,19 @@ body {
 
 /* Prominent Custom Scrollbar for Mobile & Desktop */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 16px;
+  height: 16px;
 }
 ::-webkit-scrollbar-track {
-  background: #07090e;
+  background: #0e121b; /* Slightly lighter track for contrast */
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 9999px;
-  border: 2px solid #07090e;
+  background: rgba(255, 255, 255, 0.5); /* Much brighter/visible */
+  border-radius: 10px;
+  border: 3px solid #0e121b; /* Creates a padded look against the track */
 }
-::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
   background: var(--primary);
 }
 
