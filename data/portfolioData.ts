@@ -96,7 +96,7 @@ export const PORTFOLIO_DATA = {
     { target: 5, label: 'Years of Experience', sub: 'Graphic & Creative Visual Design', suffix: '+' },
     { target: 180, label: 'Projects Completed', sub: 'Across 10+ Design Disciplines', suffix: '+' },
     { target: 50, label: 'Brands & Clients', sub: 'National & Global Collaborations', suffix: '+' },
-    { target: 100, label: 'Client Satisfaction', sub: 'Creativity, Precision & Dedication', suffix: '%' },
+    { target: 90, label: 'Client Satisfaction', sub: 'Creativity, Precision & Dedication', suffix: '%' },
   ],
 
   strengths: [
