@@ -81,26 +81,48 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-7">
+          <nav className="hidden md:flex items-center gap-5 lg:gap-6">
             {[
-              { label: 'About', href: '#about', id: 'about' },
-              { label: 'Services', href: '#services', id: 'services' },
-              { label: 'Strengths', href: '#strengths', id: 'strengths' },
-              { label: 'Portfolio', href: '#portfolio', id: 'portfolio' },
-              { label: 'Motion Lab', href: '#motion', id: 'motion' },
-              { label: 'Experience', href: '#experience', id: 'experience' },
-              { label: 'Contact', href: '#contact', id: 'contact' },
+              { label: 'About', sub: 'Vision & Story', num: '01', href: '#about', id: 'about' },
+              { label: 'Services', sub: 'Capabilities', num: '02', href: '#services', id: 'services' },
+              { label: 'Strengths', sub: 'Core Impact', num: '03', href: '#strengths', id: 'strengths' },
+              { label: 'Portfolio', sub: '9 Projects', num: '04', href: '#portfolio', id: 'portfolio' },
+              { label: 'Motion Lab', sub: 'Reels & 4K', num: '05', href: '#motion', id: 'motion' },
+              { label: 'Experience', sub: '5+ Yrs Career', num: '06', href: '#experience', id: 'experience' },
+              { label: 'Contact', sub: 'Start Project', num: '07', href: '#contact', id: 'contact' },
             ].map((link) => (
               <a
                 key={link.id}
                 href={link.href}
-                className={`text-sm font-medium transition-colors relative py-1 ${
-                  activeSection === link.id ? 'text-white font-semibold' : 'text-slate-400 hover:text-white'
+                className={`group/nav flex flex-col items-center py-1 transition-all relative ${
+                  activeSection === link.id ? 'text-white' : 'text-slate-400 hover:text-white'
                 }`}
               >
-                {link.label}
+                <div className="flex items-center gap-1.5">
+                  <span
+                    className={`text-[9px] font-mono font-bold transition-colors ${
+                      activeSection === link.id ? 'text-primary' : 'text-slate-600 group-hover/nav:text-primary/70'
+                    }`}
+                  >
+                    {link.num}
+                  </span>
+                  <span
+                    className={`text-xs lg:text-sm font-bold tracking-wide transition-colors ${
+                      activeSection === link.id ? 'text-white font-extrabold' : 'text-slate-300 group-hover/nav:text-white'
+                    }`}
+                  >
+                    {link.label}
+                  </span>
+                </div>
+                <span
+                  className={`text-[9px] font-medium tracking-tight transition-colors mt-0.5 ${
+                    activeSection === link.id ? 'text-primary' : 'text-slate-500 group-hover/nav:text-slate-400'
+                  }`}
+                >
+                  {link.sub}
+                </span>
                 {activeSection === link.id && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full" />
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full shadow-md shadow-primary/50" />
                 )}
               </a>
             ))}
@@ -151,21 +173,29 @@ export default function Navbar() {
             </button>
 
             {[
-              { label: 'About & Philosophy', href: '#about', id: 'about' },
-              { label: 'Services (10 Disciplines)', href: '#services', id: 'services' },
-              { label: 'Core Strengths', href: '#strengths', id: 'strengths' },
-              { label: 'Design Portfolio (9 Case Studies)', href: '#portfolio', id: 'portfolio' },
-              { label: 'Motion Lab (Shorts & Long Films)', href: '#motion', id: 'motion' },
-              { label: 'Experience & Milestones', href: '#experience', id: 'experience' },
-              { label: 'Contact & Project Inquiry', href: '#contact', id: 'contact' },
+              { label: 'About', sub: 'Vision & Story', num: '01', href: '#about', id: 'about' },
+              { label: 'Services', sub: '10 Disciplines', num: '02', href: '#services', id: 'services' },
+              { label: 'Strengths', sub: 'Core Impact', num: '03', href: '#strengths', id: 'strengths' },
+              { label: 'Portfolio', sub: '9 Selected Works', num: '04', href: '#portfolio', id: 'portfolio' },
+              { label: 'Motion Lab', sub: 'Shorts & 4K Films', num: '05', href: '#motion', id: 'motion' },
+              { label: 'Experience', sub: '5+ Yrs Journey', num: '06', href: '#experience', id: 'experience' },
+              { label: 'Contact', sub: 'Get In Touch', num: '07', href: '#contact', id: 'contact' },
             ].map((link) => (
               <a
                 key={link.id}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-base font-semibold text-slate-200 hover:text-primary py-2 border-b border-white/5"
+                className="flex items-center justify-between py-2.5 border-b border-white/5 group"
               >
-                {link.label}
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono font-bold text-primary">{link.num}</span>
+                  <span className="text-base font-semibold text-slate-200 group-hover:text-primary transition-colors">
+                    {link.label}
+                  </span>
+                </div>
+                <span className="text-xs text-slate-500 font-medium px-2.5 py-0.5 rounded-full bg-white/5 border border-white/5">
+                  {link.sub}
+                </span>
               </a>
             ))}
 
