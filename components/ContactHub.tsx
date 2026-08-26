@@ -8,75 +8,12 @@ import { useToast } from './Toast';
 export default function ContactHub() {
   const { showToast } = useToast();
   const [copied, setCopied] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    service: '',
-    budget: '',
-    message: '',
-  });
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PORTFOLIO_DATA.personalInfo.email);
     setCopied(true);
     showToast(`Copied email to clipboard: ${PORTFOLIO_DATA.personalInfo.email}`, 'success');
     setTimeout(() => setCopied(false), 2500);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.name || !formData.email || !formData.service || !formData.message) {
-      showToast('Please fill in all required fields (*)', 'error');
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch(`https://formsubmit.co/ajax/${PORTFOLIO_DATA.personalInfo.email}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          Name: formData.name,
-          Email: formData.email,
-          'Service Needed': formData.service,
-          'Estimated Budget': formData.budget || 'Flexible / Discuss Later',
-          'Project Details': formData.message,
-          _subject: `🎨 New Design Project Inquiry from ${formData.name}`,
-          _template: 'table',
-          _captcha: 'false'
-        })
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        showToast(`Thank you, ${formData.name}! Your message has been sent directly to Kalyan's email. You will receive a reply within 24 hours.`, 'success');
-        setFormData({
-          name: '',
-          email: '',
-          service: '',
-          budget: '',
-          message: '',
-        });
-      } else {
-        throw new Error(data.message || 'Failed to send message');
-      }
-    } catch (error) {
-      console.error('Contact Form Submission Error:', error);
-      // Fallback: Open user's mail client directly
-      showToast(`Opening your email client to send message to ${PORTFOLIO_DATA.personalInfo.email}...`, 'info');
-      const mailtoLink = `mailto:${PORTFOLIO_DATA.personalInfo.email}?subject=${encodeURIComponent(`Project Inquiry: ${formData.service}`)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nService: ${formData.service}\nBudget: ${formData.budget}\n\nMessage:\n${formData.message}`)}`;
-      window.open(mailtoLink, '_blank');
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -185,7 +122,17 @@ export default function ContactHub() {
               Fill out the form below with your project goals, deliverables, and timeline.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form
+              action={`https://formsubmit.co/${PORTFOLIO_DATA.personalInfo.email}`}
+              method="POST"
+              className="space-y-5"
+            >
+              {/* FormSubmit Configuration */}
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_subject" value="🎨 New Design Project Inquiry - Madishetti Kalyan Portfolio" />
+              <input type="hidden" name="_autoresponse" value="Thank you for reaching out to Madishetti Kalyan! I have received your project inquiry and will get back to you within 24 hours." />
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-xs font-bold text-slate-300 mb-2">
@@ -193,10 +140,9 @@ export default function ContactHub() {
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
                     placeholder="e.g. Anand Kapoor"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
@@ -207,10 +153,9 @@ export default function ContactHub() {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     required
                     placeholder="e.g. anand@aura.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
@@ -222,9 +167,9 @@ export default function ContactHub() {
                     Project Service <span className="text-rose-400">*</span>
                   </label>
                   <select
+                    name="service"
                     required
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    defaultValue=""
                     className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer"
                   >
                     <option value="" disabled>Select a Service</option>
@@ -245,11 +190,11 @@ export default function ContactHub() {
                     Estimated Budget
                   </label>
                   <select
-                    value={formData.budget}
-                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                    name="budget"
+                    defaultValue="Flexible / Discuss Later"
                     className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors cursor-pointer"
                   >
-                    <option value="">Flexible / Discuss Later</option>
+                    <option value="Flexible / Discuss Later">Flexible / Discuss Later</option>
                     <option value="< $500">&lt; $500 (Small Quick Project)</option>
                     <option value="$500 - $1,500">$500 - $1,500 (Standard Brand/Campaign)</option>
                     <option value="$1,500 - $3,000">$1,500 - $3,000 (Complete Brand Kit)</option>
@@ -263,31 +208,20 @@ export default function ContactHub() {
                   Project Details / Vision <span className="text-rose-400">*</span>
                 </label>
                 <textarea
+                  name="message"
                   required
                   rows={4}
                   placeholder="Tell me about your concept, deliverables, brand goals, and target timeline..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-dark-elevated border border-white/10 text-sm text-white focus:outline-none focus:border-primary transition-colors resize-y"
                 />
               </div>
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full py-4 rounded-full font-display font-bold text-sm text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-xl shadow-primary/30 flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all disabled:opacity-70"
+                className="w-full py-4 rounded-full font-display font-bold text-sm text-white bg-gradient-to-r from-primary to-secondary hover:from-primary-hover hover:to-secondary-hover shadow-xl shadow-primary/30 flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-all"
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Sending Inquiry...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Send Project Inquiry</span>
-                    <Send className="w-4 h-4" />
-                  </>
-                )}
+                <span>Send Project Inquiry</span>
+                <Send className="w-4 h-4" />
               </button>
             </form>
           </div>
