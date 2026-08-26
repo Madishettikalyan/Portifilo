@@ -135,13 +135,27 @@ Design Philosophy: "Design is not just about making things look good — it’s 
               </div>
 
               {/* Graphic Design Center Artwork / Profile Photo */}
-              <div className="relative w-full h-64 rounded-2xl bg-gradient-to-br from-indigo-950 via-slate-900 to-black border border-white/10 flex items-center justify-center overflow-hidden">
+              <div className="relative w-full h-80 sm:h-96 rounded-2xl bg-gradient-to-br from-indigo-950 via-slate-900 to-black border border-white/15 flex items-center justify-center overflow-hidden shadow-2xl group">
                 {PORTFOLIO_DATA.personalInfo.profileImage ? (
-                  <img
-                    src={PORTFOLIO_DATA.personalInfo.profileImage}
-                    alt={PORTFOLIO_DATA.personalInfo.name}
-                    className="w-full h-full object-cover"
-                  />
+                  <>
+                    <img
+                      src={PORTFOLIO_DATA.personalInfo.profileImage}
+                      alt={PORTFOLIO_DATA.personalInfo.name}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                    />
+                    {/* Subtle aesthetic gradient overlay at bottom of photo */}
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-dark-surface via-dark-surface/40 to-transparent flex items-end p-4">
+                      <div className="flex items-center justify-between w-full">
+                        <div>
+                          <span className="text-[10px] font-bold text-primary tracking-widest uppercase block">KALYAN</span>
+                          <span className="text-xs font-bold text-white">Visual Designer</span>
+                        </div>
+                        <span className="px-2.5 py-1 rounded-full bg-primary/80 backdrop-blur-md text-[10px] font-extrabold text-white">
+                          5+ YRS
+                        </span>
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <>
                     {/* Rotating geometric visual elements */}
