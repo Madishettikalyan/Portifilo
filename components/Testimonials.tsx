@@ -26,38 +26,39 @@ export default function Testimonials() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 mb-12">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left">
-            <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-primary uppercase mb-3">
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>CLIENT PRAISE & REVIEWS</span>
-            </span>
-            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
-              What Collaborators <span className="text-gradient">Say</span>
-            </h2>
-            <p className="text-slate-400 text-xs sm:text-sm mt-2 max-w-xl">
-              Trusted by startups, marketing directors, and global founders for exceptional graphic design and visual storytelling.
-            </p>
-          </div>
+        {/* Section Header - Perfectly Centered */}
+        <div className="text-center max-w-2xl mx-auto">
+          <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-primary uppercase mb-3">
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>CLIENT PRAISE & REVIEWS</span>
+          </span>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
+            What Collaborators <span className="text-gradient">Say</span>
+          </h2>
+          <p className="text-slate-400 text-xs sm:text-sm mt-3 max-w-xl mx-auto leading-relaxed">
+            Trusted by startups, marketing directors, and global founders for exceptional graphic design and visual storytelling.
+          </p>
 
-          {/* Side Controls Navigation */}
-          <div className="flex items-center gap-3">
+          {/* Centered Side Controls Navigation */}
+          <div className="flex items-center justify-center gap-3 mt-6">
             <button
               onClick={() => scrollSide('left')}
-              className="p-3 rounded-full bg-dark-surface border border-white/10 text-slate-300 hover:text-white hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer shadow-lg active:scale-95"
+              className="p-2.5 rounded-full bg-dark-surface border border-white/10 text-slate-300 hover:text-white hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer shadow-lg active:scale-95"
               title="Slide Left"
               aria-label="Previous Reviews"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4" />
             </button>
+            <span className="text-[11px] font-mono font-semibold text-slate-400 px-2">
+              Drag or Click to Explore
+            </span>
             <button
               onClick={() => scrollSide('right')}
-              className="p-3 rounded-full bg-dark-surface border border-white/10 text-slate-300 hover:text-white hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer shadow-lg active:scale-95"
+              className="p-2.5 rounded-full bg-dark-surface border border-white/10 text-slate-300 hover:text-white hover:border-primary/50 hover:bg-primary/10 transition-all cursor-pointer shadow-lg active:scale-95"
               title="Slide Right"
               aria-label="Next Reviews"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4" />
             </button>
           </div>
         </div>
