@@ -83,7 +83,7 @@ export default function Testimonials() {
                           key={i}
                           className={`w-4 h-4 ${
                             i < (t.rating || 5)
-                              ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]'
+                              ? 'fill-[#FFD700] text-[#FFD700] drop-shadow-[0_0_6px_rgba(255,215,0,0.5)]'
                               : 'fill-transparent text-white/20'
                           }`}
                         />
@@ -137,7 +137,7 @@ export default function Testimonials() {
                           key={i}
                           className={`w-4 h-4 ${
                             i < (t.rating || 5)
-                              ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]'
+                              ? 'fill-[#FFD700] text-[#FFD700] drop-shadow-[0_0_6px_rgba(255,215,0,0.5)]'
                               : 'fill-transparent text-white/20'
                           }`}
                         />
