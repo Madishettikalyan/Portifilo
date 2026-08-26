@@ -15,7 +15,7 @@ export default function WhatsAppWidget() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f7a6d] text-white font-display font-bold text-xs sm:text-sm shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-105 active:scale-95 transition-all duration-300"
+        className="group relative flex items-center justify-center p-3 sm:p-4 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f7a6d] text-white shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-105 active:scale-95 transition-all duration-300"
         aria-label="Chat on WhatsApp +91 8179157002"
         title="Chat with Kalyan on WhatsApp (+91 8179157002)"
       >
@@ -24,13 +24,7 @@ export default function WhatsAppWidget() {
 
         {/* WhatsApp Official Logo */}
         <div className="relative flex items-center justify-center">
-          <WhatsAppLogo className="w-5 h-5 fill-white" />
-        </div>
-
-        {/* Label */}
-        <div className="relative flex flex-col items-start leading-none">
-          <span className="text-xs font-extrabold text-white">WhatsApp</span>
-          <span className="text-[10px] text-emerald-100 font-mono mt-0.5">8179157002</span>
+          <WhatsAppLogo className="w-7 h-7 sm:w-8 sm:h-8 fill-white" />
         </div>
       </a>
     </div>

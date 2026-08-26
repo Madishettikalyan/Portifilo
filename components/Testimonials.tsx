@@ -17,9 +17,6 @@ export default function Testimonials() {
     }
   };
 
-  // Duplicate the list to create an infinite seamless loop
-  const infiniteTestimonials = [...PORTFOLIO_DATA.testimonials, ...PORTFOLIO_DATA.testimonials];
-
   return (
     <section className="py-24 relative overflow-hidden bg-dark-bg/40 border-t border-white/5" id="testimonials">
       {/* Background ambient glow */}
@@ -67,55 +64,108 @@ export default function Testimonials() {
       {/* Infinite Side Animation Marquee Track */}
       <div
         ref={scrollContainerRef}
-        className="w-full overflow-x-auto no-scrollbar scroll-smooth py-4 cursor-grab active:cursor-grabbing"
+        className="w-full overflow-hidden py-4 cursor-grab active:cursor-grabbing"
       >
-        <div className="animate-marquee-left flex gap-6 px-6">
-          {infiniteTestimonials.map((t, index) => (
-            <div
-              key={`${t.name}-${index}`}
-              className="w-[340px] sm:w-[400px] flex-shrink-0 bg-dark-surface/90 backdrop-blur-xl border border-white/10 hover:border-primary/50 rounded-3xl p-7 sm:p-8 flex flex-col justify-between hover:bg-dark-elevated transition-all duration-300 shadow-xl shadow-black/40 hover:-translate-y-1.5 group"
-            >
-              <div>
-                {/* 5-Star Glowing Rating & Quote Icon */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="flex gap-1 text-amber-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]"
-                      />
-                    ))}
+        <div className="animate-marquee-left flex w-max">
+          {/* First Group */}
+          <div className="flex gap-6 px-3 pr-3">
+            {PORTFOLIO_DATA.testimonials.map((t, index) => (
+              <div
+                key={`group1-${t.name}-${index}`}
+                className="w-[340px] sm:w-[400px] flex-shrink-0 bg-dark-surface/90 backdrop-blur-xl border border-white/10 hover:border-primary/50 rounded-3xl p-7 sm:p-8 flex flex-col justify-between hover:bg-dark-elevated transition-all duration-300 shadow-xl shadow-black/40 hover:-translate-y-1.5 group"
+              >
+                <div>
+                  {/* 5-Star Glowing Rating & Quote Icon */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex gap-1 text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]"
+                        />
+                      ))}
+                    </div>
+                    <Quote className="w-6 h-6 text-primary/30 group-hover:text-primary transition-colors" />
                   </div>
-                  <Quote className="w-6 h-6 text-primary/30 group-hover:text-primary transition-colors" />
+
+                  {/* Review Text */}
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed mb-6 italic">
+                    {t.quote}
+                  </p>
                 </div>
 
-                {/* Review Text */}
-                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed mb-6 italic">
-                  {t.quote}
-                </p>
-              </div>
+                {/* Client Info & Verified Badge */}
+                <div className="flex items-center justify-between border-t border-white/10 pt-5 mt-auto">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary text-white font-display font-extrabold text-xs flex items-center justify-center shadow-md shadow-primary/30 flex-shrink-0">
+                      {t.avatar}
+                    </div>
+                    <div>
+                      <h4 className="font-display font-bold text-sm text-white group-hover:text-primary transition-colors">
+                        {t.name}
+                      </h4>
+                      <p className="text-xs text-slate-400 font-medium">{t.role}, {t.company}</p>
+                    </div>
+                  </div>
 
-              {/* Client Info & Verified Badge */}
-              <div className="flex items-center justify-between border-t border-white/10 pt-5 mt-auto">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary text-white font-display font-extrabold text-xs flex items-center justify-center shadow-md shadow-primary/30 flex-shrink-0">
-                    {t.avatar}
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full flex-shrink-0">
+                    <CheckCircle2 className="w-3 h-3" />
+                    <span>Verified</span>
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Second Group (Identical clone for seamless looping) */}
+          <div className="flex gap-6 px-3 pr-3" aria-hidden="true">
+            {PORTFOLIO_DATA.testimonials.map((t, index) => (
+              <div
+                key={`group2-${t.name}-${index}`}
+                className="w-[340px] sm:w-[400px] flex-shrink-0 bg-dark-surface/90 backdrop-blur-xl border border-white/10 hover:border-primary/50 rounded-3xl p-7 sm:p-8 flex flex-col justify-between hover:bg-dark-elevated transition-all duration-300 shadow-xl shadow-black/40 hover:-translate-y-1.5 group"
+              >
+                <div>
+                  {/* 5-Star Glowing Rating & Quote Icon */}
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="flex gap-1 text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]"
+                        />
+                      ))}
+                    </div>
+                    <Quote className="w-6 h-6 text-primary/30 group-hover:text-primary transition-colors" />
                   </div>
-                  <div>
-                    <h4 className="font-display font-bold text-sm text-white group-hover:text-primary transition-colors">
-                      {t.name}
-                    </h4>
-                    <p className="text-xs text-slate-400 font-medium">{t.role}, {t.company}</p>
-                  </div>
+
+                  {/* Review Text */}
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed mb-6 italic">
+                    {t.quote}
+                  </p>
                 </div>
 
-                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full flex-shrink-0">
-                  <CheckCircle2 className="w-3 h-3" />
-                  <span>Verified</span>
-                </span>
+                {/* Client Info & Verified Badge */}
+                <div className="flex items-center justify-between border-t border-white/10 pt-5 mt-auto">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary text-white font-display font-extrabold text-xs flex items-center justify-center shadow-md shadow-primary/30 flex-shrink-0">
+                      {t.avatar}
+                    </div>
+                    <div>
+                      <h4 className="font-display font-bold text-sm text-white group-hover:text-primary transition-colors">
+                        {t.name}
+                      </h4>
+                      <p className="text-xs text-slate-400 font-medium">{t.role}, {t.company}</p>
+                    </div>
+                  </div>
+
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full flex-shrink-0">
+                    <CheckCircle2 className="w-3 h-3" />
+                    <span>Verified</span>
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
