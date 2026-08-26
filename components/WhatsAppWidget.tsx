@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MessageCircle, Phone, Sparkles, X } from 'lucide-react';
+import { Phone, Sparkles, X } from 'lucide-react';
+import { WhatsAppLogo } from './WhatsAppIcon';
 import { PORTFOLIO_DATA } from '@/data/portfolioData';
 
 export default function WhatsAppWidget() {
@@ -43,15 +44,15 @@ export default function WhatsAppWidget() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-display font-bold text-xs sm:text-sm shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-105 active:scale-95 transition-all duration-300"
+        className="group relative flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f7a6d] text-white font-display font-bold text-xs sm:text-sm shadow-xl shadow-emerald-500/30 hover:shadow-emerald-500/50 hover:scale-105 active:scale-95 transition-all duration-300"
         aria-label="Chat on WhatsApp +91 8179157002"
       >
         {/* Glow Ring */}
-        <div className="absolute -inset-1 bg-emerald-500 rounded-full blur-md opacity-40 group-hover:opacity-80 animate-pulse transition-opacity pointer-events-none" />
+        <div className="absolute -inset-1 bg-[#25D366] rounded-full blur-md opacity-40 group-hover:opacity-80 animate-pulse transition-opacity pointer-events-none" />
 
-        {/* WhatsApp Icon */}
+        {/* WhatsApp Official Logo */}
         <div className="relative flex items-center justify-center">
-          <MessageCircle className="w-5 h-5 fill-white text-emerald-500" />
+          <WhatsAppLogo className="w-5 h-5 fill-white" />
         </div>
 
         {/* Text */}

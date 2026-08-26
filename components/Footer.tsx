@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { ArrowUp, Mail, Phone, MessageCircle } from 'lucide-react';
+import { ArrowUp, Mail, Phone } from 'lucide-react';
+import { WhatsAppLogo } from './WhatsAppIcon';
 import { PORTFOLIO_DATA } from '@/data/portfolioData';
 
 export default function Footer() {
@@ -52,9 +53,9 @@ export default function Footer() {
                 href="https://wa.me/918179157002"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-emerald-400 transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-[#25D366] transition-colors"
               >
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <WhatsAppLogo className="w-4 h-4 fill-[#25D366]" />
                 <span>+91 8179157002 (WhatsApp & Call)</span>
               </a>
             </div>

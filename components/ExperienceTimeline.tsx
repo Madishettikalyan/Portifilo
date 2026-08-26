@@ -15,7 +15,7 @@ export default function ExperienceTimeline() {
             <span>CAREER & MASTERY</span>
           </span>
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight mb-4">
-            5+ Years of <span className="text-gradient">Creative Journey</span>
+            2+ Years of <span className="text-gradient">Creative Journey</span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
             Over the years, I have worked on a wide range of creative projects, developing designs for brands, products, digital campaigns, promotional materials, and marketing content.

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Mail, MapPin, Award, Copy, Check, Send, Sparkles, Loader2, Phone, MessageCircle } from 'lucide-react';
+import { WhatsAppLogo } from './WhatsAppIcon';
 import { PORTFOLIO_DATA } from '@/data/portfolioData';
 import { useToast } from './Toast';
 
@@ -128,21 +129,21 @@ export default function ContactHub() {
               {/* Direct WhatsApp & Phone Card */}
               <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-dark-elevated to-dark-surface border border-emerald-500/30 flex items-center justify-between gap-3 mb-4">
                 <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 flex-shrink-0 shadow-lg shadow-emerald-500/10">
-                    <MessageCircle className="w-5 h-5 fill-emerald-400/20" />
+                  <div className="w-10 h-10 rounded-xl bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366] flex-shrink-0 shadow-lg shadow-emerald-500/10">
+                    <WhatsAppLogo className="w-5 h-5 fill-[#25D366]" />
                   </div>
                   <div className="overflow-hidden">
                     <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
                       <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-400 block">
-                        WhatsApp & Phone
+                        WhatsApp & Direct Phone
                       </span>
                     </div>
                     <a
                       href="https://wa.me/918179157002"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-display font-bold text-sm sm:text-base text-white hover:text-emerald-400 transition-colors truncate block"
+                      className="font-display font-bold text-sm sm:text-base text-white hover:text-[#25D366] transition-colors truncate block"
                     >
                       +91 8179157002
                     </a>
@@ -154,9 +155,10 @@ export default function ContactHub() {
                     href="https://wa.me/918179157002"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-xs font-bold text-black flex items-center gap-1 shadow-md shadow-emerald-500/30 transition-all cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-xs font-bold text-black flex items-center gap-1.5 shadow-md shadow-emerald-500/30 transition-all cursor-pointer"
                   >
-                    <span>Chat</span>
+                    <WhatsAppLogo className="w-3.5 h-3.5 fill-black" />
+                    <span>WhatsApp</span>
                   </a>
 
                   <button
