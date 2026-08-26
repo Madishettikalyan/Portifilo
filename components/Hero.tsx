@@ -14,7 +14,7 @@ export default function Hero() {
     setTimeout(() => {
       const cvText = `MADISHETTI KALYAN
 Graphic Designer | Creative Visual Designer
-Experience: 5+ Years
+Experience: 2+ Years
 Email: madishetti.kalyan.design@gmail.com
 Location: India (Remote Worldwide)
 
@@ -63,7 +63,7 @@ Design Philosophy: "Design is not just about making things look good — it’s 
 
           {/* Subtitle */}
           <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl mb-8">
-            I’m <strong className="text-white font-semibold">{PORTFOLIO_DATA.personalInfo.name}</strong>, a passionate Graphic Designer with <strong className="text-white font-semibold">5+ years of professional experience</strong> creating impactful, visually engaging brand identities, promotional designs, digital campaigns, and high-converting creative visuals.
+            I’m <strong className="text-white font-semibold">{PORTFOLIO_DATA.personalInfo.name}</strong>, a passionate Graphic Designer with <strong className="text-white font-semibold">2+ years of professional experience</strong> creating impactful, visually engaging brand identities, promotional designs, digital campaigns, and high-converting creative visuals.
           </p>
 
           {/* Hero Buttons */}
@@ -130,7 +130,7 @@ Design Philosophy: "Design is not just about making things look good — it’s 
                 </div>
                 <div>
                   <h3 className="font-display font-bold text-xs text-white">Creative Visual Studio</h3>
-                  <p className="text-[11px] text-slate-400">Madishetti Kalyan • 5+ Yrs Exp</p>
+                  <p className="text-[11px] text-slate-400">Madishetti Kalyan • 2+ Yrs Exp</p>
                 </div>
               </div>
 
@@ -151,7 +151,7 @@ Design Philosophy: "Design is not just about making things look good — it’s 
                           <span className="text-xs font-bold text-white">Visual Designer</span>
                         </div>
                         <span className="px-2.5 py-1 rounded-full bg-primary/80 backdrop-blur-md text-[10px] font-extrabold text-white">
-                          5+ YRS
+                          2+ YRS
                         </span>
                       </div>
                     </div>
@@ -164,13 +164,13 @@ Design Philosophy: "Design is not just about making things look good — it’s 
                     
                     {/* Floating Studio Card */}
                     <div className="relative z-10 w-44 bg-dark-bg/85 backdrop-blur-md border border-white/15 rounded-xl p-4 shadow-2xl animate-badge-float">
-                      <span className="text-[9px] font-bold tracking-widest text-coral uppercase block">EST. 2019</span>
+                      <span className="text-[9px] font-bold tracking-widest text-coral uppercase block">EST. 2022</span>
                       <h4 className="font-accent font-extrabold text-xl text-white leading-tight my-1">
                         BOLD<br />VISUALS
                       </h4>
                       <div className="w-8 h-1 bg-gradient-to-r from-primary to-secondary rounded mb-3" />
                       <div className="flex justify-between text-[9px] font-bold text-slate-400">
-                        <span>5+ YRS</span>
+                        <span>2+ YRS</span>
                         <span>DESIGN THINKING</span>
                       </div>
                     </div>

@@ -76,13 +76,13 @@ export const PORTFOLIO_DATA = {
   personalInfo: {
     name: 'Madishetti Kalyan',
     title: 'Graphic Designer | Creative Visual Designer',
-    experienceYears: '5+',
+    experienceYears: '2+',
     profileImage: '/images/profile.jpg',
     tagline: 'Transforming ideas into impossible-to-ignore visual experiences.',
     email: 'madishettikalyan55@gmail.com',
     location: 'India (Available for Worldwide Remote)',
     philosophy: '“Design is not just about making things look good — it’s about making ideas impossible to ignore.”',
-    bio: 'I’m Madishetti Kalyan, a passionate Graphic Designer with over 5 years of professional experience in creating impactful and visually engaging designs. I specialize in transforming ideas into creative visual experiences that communicate clearly, connect with audiences, and strengthen brand identity. My design approach combines creativity, visual storytelling, modern aesthetics, and attention to detail.',
+    bio: 'I’m Madishetti Kalyan, a passionate Graphic Designer with over 2 years of professional experience in creating impactful and visually engaging designs. I specialize in transforming ideas into creative visual experiences that communicate clearly, connect with audiences, and strengthen brand identity. My design approach combines creativity, visual storytelling, modern aesthetics, and attention to detail.',
     socials: {
       behance: 'https://behance.net',
       dribbble: 'https://dribbble.com',
@@ -93,7 +93,7 @@ export const PORTFOLIO_DATA = {
   },
 
   stats: [
-    { target: 5, label: 'Years of Experience', sub: 'Graphic & Creative Visual Design', suffix: '+' },
+    { target: 2, label: 'Years of Experience', sub: 'Graphic & Creative Visual Design', suffix: '+' },
     { target: 180, label: 'Projects Completed', sub: 'Across 10+ Design Disciplines', suffix: '+' },
     { target: 50, label: 'Brands & Clients', sub: 'National & Global Collaborations', suffix: '+' },
     { target: 90, label: 'Client Satisfaction', sub: 'Creativity, Precision & Dedication', suffix: '%' },
