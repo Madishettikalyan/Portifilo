@@ -127,7 +127,7 @@ export default function ContactHub() {
               </p>
 
               {/* Direct WhatsApp & Phone Card */}
-              <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-dark-elevated to-dark-surface border border-emerald-500/30 flex items-center justify-between gap-2 sm:gap-3 mb-4">
+              <div className="p-3 sm:p-4 rounded-2xl bg-dark-elevated border border-white/10 flex items-center justify-between gap-2 sm:gap-3 mb-4">
                 <div className="flex items-center gap-2 sm:gap-3 overflow-hidden">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366] flex-shrink-0 shadow-lg shadow-emerald-500/10">
                     <WhatsAppLogo className="w-4 h-4 sm:w-5 sm:h-5 fill-[#25D366]" />
