@@ -77,11 +77,15 @@ export default function Testimonials() {
                 <div>
                   {/* 5-Star Glowing Rating & Quote Icon */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="flex gap-1 text-amber-400">
+                    <div className="flex gap-1">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]"
+                          className={`w-4 h-4 ${
+                            i < (t.rating || 5)
+                              ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]'
+                              : 'fill-transparent text-white/20'
+                          }`}
                         />
                       ))}
                     </div>
@@ -127,11 +131,15 @@ export default function Testimonials() {
                 <div>
                   {/* 5-Star Glowing Rating & Quote Icon */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="flex gap-1 text-amber-400">
+                    <div className="flex gap-1">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
-                          className="w-4 h-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]"
+                          className={`w-4 h-4 ${
+                            i < (t.rating || 5)
+                              ? 'fill-amber-400 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.4)]'
+                              : 'fill-transparent text-white/20'
+                          }`}
                         />
                       ))}
                     </div>

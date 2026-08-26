@@ -52,6 +52,7 @@ export interface Testimonial {
   company: string;
   avatar: string;
   quote: string;
+  rating?: number;
 }
 
 export interface VideoItem {
@@ -419,42 +420,48 @@ export const PORTFOLIO_DATA = {
       role: 'Founder',
       company: 'Aura Skincare',
       avatar: 'AK',
-      quote: '“Kalyan has an extraordinary gift for taking a complex brief and turning it into a visual identity that immediately commands attention. His turnaround speed, creativity, and precision are world-class.”'
+      quote: '“Kalyan has an extraordinary gift for taking a complex brief and turning it into a visual identity that immediately commands attention. His turnaround speed, creativity, and precision are world-class.”',
+      rating: 5
     },
     {
       name: 'Sneha Reddy',
       role: 'Marketing Director',
       company: 'Velocity Fit',
       avatar: 'SR',
-      quote: '“Our social media campaign engagement doubled after Kalyan took over our creative visuals. He truly understands modern aesthetics, storytelling, and what makes people stop scrolling.”'
+      quote: '“Our social media campaign engagement doubled after Kalyan took over our creative visuals. He truly understands modern aesthetics, storytelling, and what makes people stop scrolling.”',
+      rating: 4
     },
     {
       name: 'Rahul Verma',
       role: 'Creative Lead',
       company: 'Apex Media',
       avatar: 'RV',
-      quote: '“From logo guidelines to retail packaging and AI-assisted key visuals, Kalyan delivered beyond our highest expectations. He’s our go-to creative thinker for every big project.”'
+      quote: '“From logo guidelines to retail packaging and AI-assisted key visuals, Kalyan delivered beyond our highest expectations. He’s our go-to creative thinker for every big project.”',
+      rating: 5
     },
     {
       name: 'Priya Sharma',
       role: 'Brand Manager',
       company: 'LÚMEN Botanicals',
       avatar: 'PS',
-      quote: '“The packaging and visual branding Kalyan designed for our product launch helped us get stocked across 40+ retail stores in our first quarter. Exceptional design eye!”'
+      quote: '“The packaging and visual branding Kalyan designed for our product launch helped us get stocked across 40+ retail stores in our first quarter. Exceptional design eye!”',
+      rating: 4
     },
     {
       name: 'David Miller',
       role: 'Head of Growth',
       company: 'NeoPulse Global',
       avatar: 'DM',
-      quote: '“Working with Kalyan on our global tech keynote motion graphics and digital branding was seamless. He brings unmatched originality and clean typography to every canvas.”'
+      quote: '“Working with Kalyan on our global tech keynote motion graphics and digital branding was seamless. He brings unmatched originality and clean typography to every canvas.”',
+      rating: 5
     },
     {
       name: 'Vikram Malhotra',
       role: 'Co-Founder',
       company: 'Zenith Specialty Coffee',
       avatar: 'VM',
-      quote: '“Kalyan created a brand identity and packaging system for Zenith that our customers constantly compliment. His passion for design and dedication are evident in every detail.”'
+      quote: '“Kalyan created a brand identity and packaging system for Zenith that our customers constantly compliment. His passion for design and dedication are evident in every detail.”',
+      rating: 3
     }
   ] as Testimonial[],
 
