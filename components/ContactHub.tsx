@@ -132,18 +132,18 @@ export default function ContactHub() {
                   <div className="w-10 h-10 rounded-xl bg-[#25D366]/20 border border-[#25D366]/40 flex items-center justify-center text-[#25D366] flex-shrink-0 shadow-lg shadow-emerald-500/10">
                     <WhatsAppLogo className="w-5 h-5 fill-[#25D366]" />
                   </div>
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden flex-1 min-w-0">
                     <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
-                      <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-400 block">
-                        WhatsApp & Direct Phone
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse flex-shrink-0" />
+                      <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider text-emerald-400 whitespace-nowrap truncate block">
+                        WhatsApp & Phone
                       </span>
                     </div>
                     <a
                       href="https://wa.me/918179157002"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-display font-bold text-sm sm:text-base text-white hover:text-[#25D366] transition-colors truncate block"
+                      className="font-display font-bold text-sm sm:text-base text-white hover:text-[#25D366] transition-colors whitespace-nowrap truncate block"
                     >
                       +91 8179157002
                     </a>
