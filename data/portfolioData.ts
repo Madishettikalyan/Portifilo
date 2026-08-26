@@ -461,7 +461,7 @@ export const PORTFOLIO_DATA = {
       company: 'Zenith Specialty Coffee',
       avatar: 'VM',
       quote: '“Kalyan created a brand identity and packaging system for Zenith that our customers constantly compliment. His passion for design and dedication are evident in every detail.”',
-      rating: 3
+      rating: 5
     }
   ] as Testimonial[],
 
