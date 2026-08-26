@@ -73,6 +73,11 @@ export interface VideoItem {
   gradient: string;
 }
 
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
 export const PORTFOLIO_DATA = {
   personalInfo: {
     name: 'Madishetti Kalyan',
@@ -589,4 +594,31 @@ export const PORTFOLIO_DATA = {
       gradient: 'from-amber-950 via-stone-900 to-black',
     },
   ] as VideoItem[],
+  
+  faqs: [
+    {
+      question: 'What design services do you offer?',
+      answer: 'I specialize in Brand Identity, Social Media Creatives, Packaging Design, Posters & Advertising, Digital Marketing Visuals, and AI-Assisted Concept Art.'
+    },
+    {
+      question: 'How long does a typical project take?',
+      answer: 'Timelines vary based on scope. A social media ad campaign might take 3-5 days, while a full brand identity system can take 2-3 weeks to ensure perfection.'
+    },
+    {
+      question: 'What is your creative design process?',
+      answer: 'My process starts with a deep discovery phase, followed by conceptualization, multiple design drafts, client feedback loops, and finally delivering high-resolution, print-ready files.'
+    },
+    {
+      question: 'Do you work with international clients?',
+      answer: 'Yes! I have collaborated with brands and founders globally. I am fully equipped to work remotely and can seamlessly align with different time zones.'
+    },
+    {
+      question: 'What software tools do you use?',
+      answer: 'I use industry-standard tools including Adobe Photoshop, Illustrator, InDesign, Figma, and generative AI tools like Midjourney for advanced conceptualization.'
+    },
+    {
+      question: 'How do we get started?',
+      answer: 'Simply reach out to me via WhatsApp, Email, or the contact form below. We can schedule a quick introductory chat to discuss your vision and requirements.'
+    }
+  ] as FAQ[],
 };

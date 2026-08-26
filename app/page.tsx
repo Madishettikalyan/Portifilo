@@ -8,6 +8,7 @@ import PortfolioGallery from '@/components/PortfolioGallery';
 import VideoShowcase from '@/components/VideoShowcase';
 import ExperienceTimeline from '@/components/ExperienceTimeline';
 import Testimonials from '@/components/Testimonials';
+import FAQ from '@/components/FAQ';
 import ContactHub from '@/components/ContactHub';
 import Footer from '@/components/Footer';
 import WhatsAppWidget from '@/components/WhatsAppWidget';
@@ -25,9 +26,11 @@ export default function HomePage() {
       <VideoShowcase />
       <ExperienceTimeline />
       <Testimonials />
+      <FAQ />
       <ContactHub />
       <Footer />
       <WhatsAppWidget />
     </main>
   );
 }
+
