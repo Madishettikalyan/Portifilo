@@ -434,6 +434,27 @@ export const PORTFOLIO_DATA = {
       company: 'Apex Media',
       avatar: 'RV',
       quote: '“From logo guidelines to retail packaging and AI-assisted key visuals, Kalyan delivered beyond our highest expectations. He’s our go-to creative thinker for every big project.”'
+    },
+    {
+      name: 'Priya Sharma',
+      role: 'Brand Manager',
+      company: 'LÚMEN Botanicals',
+      avatar: 'PS',
+      quote: '“The packaging and visual branding Kalyan designed for our product launch helped us get stocked across 40+ retail stores in our first quarter. Exceptional design eye!”'
+    },
+    {
+      name: 'David Miller',
+      role: 'Head of Growth',
+      company: 'NeoPulse Global',
+      avatar: 'DM',
+      quote: '“Working with Kalyan on our global tech keynote motion graphics and digital branding was seamless. He brings unmatched originality and clean typography to every canvas.”'
+    },
+    {
+      name: 'Vikram Malhotra',
+      role: 'Co-Founder',
+      company: 'Zenith Specialty Coffee',
+      avatar: 'VM',
+      quote: '“Kalyan created a brand identity and packaging system for Zenith that our customers constantly compliment. His passion for design and dedication are evident in every detail.”'
     }
   ] as Testimonial[],
 
