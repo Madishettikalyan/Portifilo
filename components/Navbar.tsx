@@ -134,12 +134,12 @@ export default function Navbar() {
             {/* Quick Search Button */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-dark-surface border border-white/10 hover:border-primary/50 text-white text-sm font-semibold flex items-center gap-2.5 transition-all cursor-pointer shadow-sm group"
+              className="w-10 h-10 sm:w-56 sm:h-auto px-0 sm:px-6 py-0 sm:py-3 rounded-full bg-dark-surface border border-white/10 hover:border-primary/50 text-white font-semibold flex items-center justify-center sm:justify-start gap-3 transition-all cursor-pointer shadow-sm group"
               title="Search Portfolio"
               aria-label="Search Portfolio"
             >
-              <Search className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline text-sm text-white/80 group-hover:text-white">Search</span>
+              <Search className="w-4 h-4 sm:w-5 sm:h-5 text-primary group-hover:scale-110 transition-transform" />
+              <span className="hidden sm:inline text-base text-white/70 group-hover:text-white">Search...</span>
             </button>
 
             {/* Mobile Menu Trigger */}
