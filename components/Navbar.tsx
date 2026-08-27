@@ -113,13 +113,11 @@ export default function Navbar() {
               <a
                 key={link.id}
                 href={link.href}
-                className={`group/nav flex flex-col items-center py-2 transition-all relative ${
-                  activeSection === link.id ? 'text-white' : 'text-slate-400 hover:text-white'
-                }`}
+                className="group/nav flex flex-col items-center py-2 transition-all relative text-white"
               >
                 <span
-                  className={`text-sm font-bold tracking-wide transition-colors ${
-                    activeSection === link.id ? 'text-white font-extrabold' : 'text-slate-300 group-hover/nav:text-white'
+                  className={`text-base font-bold tracking-wide transition-colors ${
+                    activeSection === link.id ? 'text-white font-extrabold' : 'text-white/80 group-hover/nav:text-white'
                   }`}
                 >
                   {link.label}
@@ -136,12 +134,12 @@ export default function Navbar() {
             {/* Quick Search Button */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="px-3 py-2 rounded-full bg-dark-surface border border-white/10 hover:border-primary/50 text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer shadow-sm group"
+              className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-dark-surface border border-white/10 hover:border-primary/50 text-white text-sm font-semibold flex items-center gap-2.5 transition-all cursor-pointer shadow-sm group"
               title="Search Portfolio"
               aria-label="Search Portfolio"
             >
-              <Search className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline text-xs text-slate-400 group-hover:text-slate-200">Search</span>
+              <Search className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+              <span className="hidden sm:inline text-sm text-white/80 group-hover:text-white">Search</span>
             </button>
 
             {/* Mobile Menu Trigger */}
