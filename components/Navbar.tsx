@@ -67,8 +67,27 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Brand Logo */}
           <a href="#hero" className="flex items-center gap-3.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primary to-secondary flex items-center justify-center font-display font-extrabold text-lg text-white shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform">
-              MK
+            <div className="relative w-10 h-10 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-[0_0_10px_rgba(99,102,241,0.4)]">
+                <rect width="40" height="40" rx="10" fill="currentColor" className="text-primary/10" />
+                <rect width="40" height="40" rx="10" stroke="url(#mk-gradient)" strokeWidth="1.5" />
+                
+                {/* Connected M and K monogram */}
+                <path 
+                  d="M12 27V13L17.5 19L23 13V27 M23 20L29 13 M23 20L29 27" 
+                  stroke="url(#mk-gradient)" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                />
+
+                <defs>
+                  <linearGradient id="mk-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#6366f1" />
+                    <stop offset="100%" stopColor="#a855f7" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
             <div className="flex flex-col">
               <span className="font-display font-bold text-sm tracking-wide text-white group-hover:text-primary transition-colors">
@@ -83,46 +102,30 @@ export default function Navbar() {
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-5 lg:gap-6">
             {[
-              { label: 'About', sub: 'Vision & Story', num: '01', href: '#about', id: 'about' },
-              { label: 'Services', sub: 'Capabilities', num: '02', href: '#services', id: 'services' },
-              { label: 'Strengths', sub: 'Core Impact', num: '03', href: '#strengths', id: 'strengths' },
-              { label: 'Portfolio', sub: '9 Projects', num: '04', href: '#portfolio', id: 'portfolio' },
-              { label: 'Motion Lab', sub: 'Reels & 4K', num: '05', href: '#motion', id: 'motion' },
-              { label: 'Experience', sub: '2+ Yrs Career', num: '06', href: '#experience', id: 'experience' },
-              { label: 'Contact', sub: 'Start Project', num: '07', href: '#contact', id: 'contact' },
+              { label: 'About', href: '#about', id: 'about' },
+              { label: 'Services', href: '#services', id: 'services' },
+              { label: 'Strengths', href: '#strengths', id: 'strengths' },
+              { label: 'Portfolio', href: '#portfolio', id: 'portfolio' },
+              { label: 'Motion Lab', href: '#motion', id: 'motion' },
+              { label: 'Experience', href: '#experience', id: 'experience' },
+              { label: 'Contact', href: '#contact', id: 'contact' },
             ].map((link) => (
               <a
                 key={link.id}
                 href={link.href}
-                className={`group/nav flex flex-col items-center py-1 transition-all relative ${
+                className={`group/nav flex flex-col items-center py-2 transition-all relative ${
                   activeSection === link.id ? 'text-white' : 'text-slate-400 hover:text-white'
                 }`}
               >
-                <div className="flex items-center gap-1.5">
-                  <span
-                    className={`text-[9px] font-mono font-bold transition-colors ${
-                      activeSection === link.id ? 'text-primary' : 'text-slate-600 group-hover/nav:text-primary/70'
-                    }`}
-                  >
-                    {link.num}
-                  </span>
-                  <span
-                    className={`text-xs lg:text-sm font-bold tracking-wide transition-colors ${
-                      activeSection === link.id ? 'text-white font-extrabold' : 'text-slate-300 group-hover/nav:text-white'
-                    }`}
-                  >
-                    {link.label}
-                  </span>
-                </div>
                 <span
-                  className={`text-[9px] font-medium tracking-tight transition-colors mt-0.5 ${
-                    activeSection === link.id ? 'text-primary' : 'text-slate-500 group-hover/nav:text-slate-400'
+                  className={`text-sm font-bold tracking-wide transition-colors ${
+                    activeSection === link.id ? 'text-white font-extrabold' : 'text-slate-300 group-hover/nav:text-white'
                   }`}
                 >
-                  {link.sub}
+                  {link.label}
                 </span>
                 {activeSection === link.id && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full shadow-md shadow-primary/50" />
+                  <span className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full shadow-md shadow-primary/50" />
                 )}
               </a>
             ))}
@@ -134,14 +137,11 @@ export default function Navbar() {
             <button
               onClick={() => setSearchOpen(true)}
               className="px-3 py-2 rounded-full bg-dark-surface border border-white/10 hover:border-primary/50 text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer shadow-sm group"
-              title="Search Portfolio (Ctrl + K)"
+              title="Search Portfolio"
               aria-label="Search Portfolio"
             >
               <Search className="w-3.5 h-3.5 text-primary group-hover:scale-110 transition-transform" />
               <span className="hidden sm:inline text-xs text-slate-400 group-hover:text-slate-200">Search</span>
-              <kbd className="hidden lg:inline-block px-1.5 py-0.5 rounded bg-white/10 text-[9px] font-mono text-slate-400">
-                Ctrl K
-              </kbd>
             </button>
 
             {/* Mobile Menu Trigger */}
@@ -173,13 +173,13 @@ export default function Navbar() {
             </button>
 
             {[
-              { label: 'About', sub: 'Vision & Story', num: '01', href: '#about', id: 'about' },
-              { label: 'Services', sub: '10 Disciplines', num: '02', href: '#services', id: 'services' },
-              { label: 'Strengths', sub: 'Core Impact', num: '03', href: '#strengths', id: 'strengths' },
-              { label: 'Portfolio', sub: '9 Selected Works', num: '04', href: '#portfolio', id: 'portfolio' },
-              { label: 'Motion Lab', sub: 'Shorts & 4K Films', num: '05', href: '#motion', id: 'motion' },
-              { label: 'Experience', sub: '2+ Yrs Journey', num: '06', href: '#experience', id: 'experience' },
-              { label: 'Contact', sub: 'Get In Touch', num: '07', href: '#contact', id: 'contact' },
+              { label: 'About', href: '#about', id: 'about' },
+              { label: 'Services', href: '#services', id: 'services' },
+              { label: 'Strengths', href: '#strengths', id: 'strengths' },
+              { label: 'Portfolio', href: '#portfolio', id: 'portfolio' },
+              { label: 'Motion Lab', href: '#motion', id: 'motion' },
+              { label: 'Experience', href: '#experience', id: 'experience' },
+              { label: 'Contact', href: '#contact', id: 'contact' },
             ].map((link) => (
               <a
                 key={link.id}
@@ -188,14 +188,10 @@ export default function Navbar() {
                 className="flex items-center justify-between py-2.5 border-b border-white/5 group"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono font-bold text-primary">{link.num}</span>
                   <span className="text-base font-semibold text-slate-200 group-hover:text-primary transition-colors">
                     {link.label}
                   </span>
                 </div>
-                <span className="text-xs text-slate-500 font-medium px-2.5 py-0.5 rounded-full bg-white/5 border border-white/5">
-                  {link.sub}
-                </span>
               </a>
             ))}
 
