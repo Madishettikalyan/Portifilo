@@ -8,9 +8,21 @@ export default function IntroScreen() {
   const [isScanning, setIsScanning] = useState(false);
   const [isGranted, setIsGranted] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+  const [stars, setStars] = useState<{id: number, left: string, top: string, size: number, duration: string, delay: string}[]>([]);
 
   useEffect(() => {
     setHasMounted(true);
+    
+    // Generate moving stars
+    const generatedStars = Array.from({ length: 80 }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      size: Math.random() * 2 + 1,
+      duration: `${Math.random() * 8 + 4}s`,
+      delay: `${Math.random() * 5}s`,
+    }));
+    setStars(generatedStars);
     
     // Force scroll to top on every refresh
     if ('scrollRestoration' in window.history) {
@@ -60,6 +72,24 @@ export default function IntroScreen() {
       {/* Dynamic Animated Background */}
       <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-15 bg-center" />
       <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#07090e] opacity-90" />
+      
+      {/* Moving Stars */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {stars.map((star) => (
+          <div
+            key={star.id}
+            className="absolute bg-white rounded-full animate-float-stars"
+            style={{
+              left: star.left,
+              top: star.top,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              animationDuration: star.duration,
+              animationDelay: star.delay,
+            }}
+          />
+        ))}
+      </div>
       
       {/* Glowing Orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />

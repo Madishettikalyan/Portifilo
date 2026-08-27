@@ -160,3 +160,10 @@ body {
   100% { transform: translateY(256px); opacity: 0; }
 }
 
+@keyframes float-stars {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.2; }
+  33% { transform: translateY(-20px) translateX(10px) scale(1.2); opacity: 0.8; }
+  66% { transform: translateY(10px) translateX(-15px) scale(0.8); opacity: 0.4; }
+  100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.2; }
+}
+
