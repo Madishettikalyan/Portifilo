@@ -99,7 +99,7 @@ export default function IntroScreen() {
           style={{ 
             background: 'radial-gradient(circle at 30% 30%, rgba(99,102,241,0.4), rgba(7,9,14,1) 70%)',
             boxShadow: 'inset -20px -20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(99,102,241,0.2)',
-            animation: 'float-planet-1 25s ease-in-out infinite'
+            animation: 'float-planet-1 15s ease-in-out infinite'
           }}
         />
         
@@ -109,7 +109,7 @@ export default function IntroScreen() {
           style={{ 
             background: 'radial-gradient(circle at 20% 40%, rgba(16,185,129,0.5), rgba(7,9,14,1) 80%)',
             boxShadow: 'inset -15px -15px 30px rgba(0,0,0,0.8)',
-            animation: 'float-planet-2 35s ease-in-out infinite reverse'
+            animation: 'float-planet-2 18s ease-in-out infinite reverse'
           }}
         />
 
@@ -119,7 +119,7 @@ export default function IntroScreen() {
           style={{ 
             background: 'radial-gradient(circle at 40% 40%, rgba(168,85,247,0.6), rgba(7,9,14,1) 70%)',
             boxShadow: 'inset -5px -5px 10px rgba(0,0,0,0.8)',
-            animation: 'float-planet-1 40s ease-in-out infinite'
+            animation: 'float-planet-1 22s ease-in-out infinite'
           }}
         />
       </div>
