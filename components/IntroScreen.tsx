@@ -8,21 +8,9 @@ export default function IntroScreen() {
   const [isScanning, setIsScanning] = useState(false);
   const [isGranted, setIsGranted] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
-  const [stars, setStars] = useState<{id: number, left: string, top: string, size: number, duration: string, delay: string}[]>([]);
 
   useEffect(() => {
     setHasMounted(true);
-    
-    // Generate moving stars
-    const generatedStars = Array.from({ length: 80 }).map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      size: Math.random() * 2 + 1,
-      duration: `${Math.random() * 8 + 4}s`,
-      delay: `${Math.random() * 5}s`,
-    }));
-    setStars(generatedStars);
     
     // Force scroll to top on every refresh
     if ('scrollRestoration' in window.history) {
@@ -69,26 +57,11 @@ export default function IntroScreen() {
   return (
     <div className={`fixed inset-0 z-[10000] bg-[#07090e] flex items-center justify-center transition-all duration-1000 ${isGranted ? 'opacity-0 scale-105 pointer-events-none delay-1000' : 'opacity-100 scale-100'}`}>
       
-      {/* Dynamic Animated Background */}
-      <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-15 bg-center" />
-      <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#07090e] opacity-90" />
-      
-      {/* Moving Stars */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className="absolute bg-white rounded-full animate-float-stars"
-            style={{
-              left: star.left,
-              top: star.top,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              animationDuration: star.duration,
-              animationDelay: star.delay,
-            }}
-          />
-        ))}
+      {/* Drifting Sky Container */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ animation: 'sky-drift 40s ease-in-out infinite' }}>
+        {/* Dynamic Animated Background Grids & Gradients */}
+        <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-15 bg-center scale-110" />
+        <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#07090e] opacity-90 scale-110" />
       </div>
       
       {/* Moving Planets (Grahalu) */}
