@@ -11,8 +11,20 @@ export default function IntroScreen() {
 
   useEffect(() => {
     setHasMounted(true);
-    // Uncomment to show only once per session
-    // if (sessionStorage.getItem('introSeen')) setIsVisible(false);
+    
+    // Force scroll to top on every refresh
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    
+    // Lock scrolling while intro is visible
+    document.body.style.overflow = 'hidden';
+
+    // Cleanup in case of unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, []);
 
   const handleScan = () => {
@@ -29,6 +41,9 @@ export default function IntroScreen() {
     setTimeout(() => {
       setIsScanning(false);
       setIsGranted(true);
+      
+      // Unlock scrolling as the intro fades out
+      document.body.style.overflow = '';
       
       setTimeout(() => {
         setIsVisible(false);
