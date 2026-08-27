@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import IntroScreen from '@/components/IntroScreen';
 import Hero from '@/components/Hero';
 import StatsBar from '@/components/StatsBar';
 import AboutPhilosophy from '@/components/AboutPhilosophy';
@@ -16,6 +17,7 @@ import WhatsAppWidget from '@/components/WhatsAppWidget';
 export default function HomePage() {
   return (
     <main className="min-h-screen relative flex flex-col">
+      <IntroScreen />
       <Navbar />
       <Hero />
       <StatsBar />
