@@ -91,6 +91,39 @@ export default function IntroScreen() {
         ))}
       </div>
       
+      {/* Moving Planets (Grahalu) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Planet 1 - Large distant purple/indigo planet */}
+        <div 
+          className="absolute -left-20 top-20 w-72 h-72 rounded-full opacity-40 mix-blend-screen"
+          style={{ 
+            background: 'radial-gradient(circle at 30% 30%, rgba(99,102,241,0.4), rgba(7,9,14,1) 70%)',
+            boxShadow: 'inset -20px -20px 50px rgba(0,0,0,0.8), 0 0 40px rgba(99,102,241,0.2)',
+            animation: 'float-planet-1 25s ease-in-out infinite'
+          }}
+        />
+        
+        {/* Planet 2 - Medium emerald/teal gas giant on the right */}
+        <div 
+          className="absolute -right-10 bottom-20 w-48 h-48 rounded-full opacity-30 mix-blend-screen"
+          style={{ 
+            background: 'radial-gradient(circle at 20% 40%, rgba(16,185,129,0.5), rgba(7,9,14,1) 80%)',
+            boxShadow: 'inset -15px -15px 30px rgba(0,0,0,0.8)',
+            animation: 'float-planet-2 35s ease-in-out infinite reverse'
+          }}
+        />
+
+        {/* Planet 3 - Small distant moon */}
+        <div 
+          className="absolute right-1/4 top-1/4 w-12 h-12 rounded-full opacity-50 mix-blend-screen blur-[1px]"
+          style={{ 
+            background: 'radial-gradient(circle at 40% 40%, rgba(168,85,247,0.6), rgba(7,9,14,1) 70%)',
+            boxShadow: 'inset -5px -5px 10px rgba(0,0,0,0.8)',
+            animation: 'float-planet-1 40s ease-in-out infinite'
+          }}
+        />
+      </div>
+      
       {/* Glowing Orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s', animationDelay: '1s' }} />
