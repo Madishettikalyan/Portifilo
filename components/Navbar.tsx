@@ -116,8 +116,8 @@ export default function Navbar() {
                 className="group/nav flex flex-col items-center py-2 transition-all relative text-white"
               >
                 <span
-                  className={`text-base font-bold tracking-wide transition-colors ${
-                    activeSection === link.id ? 'text-white font-extrabold' : 'text-white/80 group-hover/nav:text-white'
+                  className={`text-base tracking-wide transition-colors ${
+                    activeSection === link.id ? 'text-white font-extrabold' : 'text-white font-bold'
                   }`}
                 >
                   {link.label}
@@ -134,12 +134,12 @@ export default function Navbar() {
             {/* Quick Search Button */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="w-10 h-10 sm:w-56 sm:h-auto px-0 sm:px-6 py-0 sm:py-3 rounded-full bg-dark-surface border border-white/10 hover:border-primary/50 text-white font-semibold flex items-center justify-center sm:justify-start gap-3 transition-all cursor-pointer shadow-sm group"
+              className="w-10 h-10 sm:w-56 sm:h-auto px-0 sm:px-5 py-0 sm:py-2 rounded-full bg-dark-surface border border-white/10 hover:border-primary/50 text-white font-semibold flex items-center justify-center sm:justify-start gap-3 transition-all cursor-pointer shadow-sm group"
               title="Search Portfolio"
               aria-label="Search Portfolio"
             >
               <Search className="w-4 h-4 sm:w-5 sm:h-5 text-primary group-hover:scale-110 transition-transform" />
-              <span className="hidden sm:inline text-base text-white/70 group-hover:text-white">Search...</span>
+              <span className="hidden sm:inline text-base text-white">Search...</span>
             </button>
 
             {/* Mobile Menu Trigger */}
