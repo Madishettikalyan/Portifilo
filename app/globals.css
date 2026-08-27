@@ -189,3 +189,46 @@ body {
   100% { transform: scale(1.1) translate(0, 0) rotate(0deg); }
 }
 
+.stars-layer-1 {
+  background-image: 
+    radial-gradient(1px 1px at 10px 20px, white, transparent),
+    radial-gradient(1px 1px at 50px 60px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1.5px 1.5px at 90px 10px, white, transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 160px 40px, white, transparent);
+  background-size: 200px 200px;
+  animation: stars-scroll-1 25s linear infinite;
+}
+
+.stars-layer-2 {
+  background-image: 
+    radial-gradient(1.5px 1.5px at 30px 40px, white, transparent),
+    radial-gradient(2px 2px at 80px 120px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 150px 30px, white, transparent),
+    radial-gradient(2.5px 2.5px at 220px 90px, rgba(255,255,255,0.7), transparent);
+  background-size: 300px 300px;
+  animation: stars-scroll-2 45s linear infinite;
+}
+
+.stars-layer-3 {
+  background-image: 
+    radial-gradient(2px 2px at 40px 100px, white, transparent),
+    radial-gradient(2px 2px at 180px 250px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(3px 3px at 350px 50px, white, transparent);
+  background-size: 450px 450px;
+  animation: stars-scroll-3 65s linear infinite;
+}
+
+@keyframes stars-scroll-1 {
+  0% { background-position: 0 0; }
+  100% { background-position: 200px 200px; }
+}
+@keyframes stars-scroll-2 {
+  0% { background-position: 0 0; }
+  100% { background-position: -300px 300px; }
+}
+@keyframes stars-scroll-3 {
+  0% { background-position: 0 0; }
+  100% { background-position: 450px -450px; }
+}
+

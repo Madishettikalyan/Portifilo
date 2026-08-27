@@ -59,6 +59,11 @@ export default function IntroScreen() {
       
       {/* Drifting Sky Container */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0" style={{ animation: 'sky-drift 40s ease-in-out infinite' }}>
+        {/* Continuous Scrolling Star Layers */}
+        <div className="absolute inset-0 stars-layer-1 opacity-60" />
+        <div className="absolute inset-0 stars-layer-2 opacity-50" />
+        <div className="absolute inset-0 stars-layer-3 opacity-40" />
+
         {/* Dynamic Animated Background Grids & Gradients */}
         <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-15 bg-center scale-110" />
         <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#07090e] opacity-90 scale-110" />
